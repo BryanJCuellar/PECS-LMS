@@ -1,0 +1,227 @@
+<div id="sign-page">
+  <!--Header component-->
+  <app-header></app-header>
+  <main id="signup">
+    <section *ngIf="nombreSeccion === 'signup'" id="section-signup" class="py-5">
+      <div class="container-md">
+        <h1 class="title-text-2 fw-bold mt-3 mb-5">Crea Tu Cuenta</h1>
+        <form [formGroup]="formularioRegistro" (ngSubmit)="registrarCuenta()">
+          <div class="form-group mb-5">
+            <div class="row">
+              <div class="col-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Tipo de Cuenta</label>
+              </div>
+              <div (click)="seleccionarImagen(studentImg)" class="col-6 col-lg-4 text-center" style="cursor: pointer;">
+                <img #studentImg id="student-img" [ngClass]="{'filter-none':tipoCuenta === 3}"
+                  src="../../../assets/img/users/student-account.png" alt="estudiante-img">
+                <div class="content-text mt-3" [ngClass]="{'image-text-selected':tipoCuenta === 3}">
+                  Estudiante<i class="far fa-circle ms-2" *ngIf="tipoCuenta != 3"></i>
+                  <i class="fas fa-check-circle ms-2" *ngIf="tipoCuenta === 3"></i>
+                </div>
+              </div>
+              <div (click)="seleccionarImagen(teacherImg)" class="col-6 col-lg-4 text-center" style="cursor: pointer;">
+                <img #teacherImg id="teacher-img" [ngClass]="{'filter-none':tipoCuenta === 2}"
+                  src="../../../assets/img/users/teacher-account.png" alt="profesor-img">
+                <div class="content-text mt-3" [ngClass]="{'image-text-selected':tipoCuenta === 2}">
+                  Docente<i class="far fa-circle ms-2" *ngIf="tipoCuenta != 2"></i>
+                  <i class="fas fa-check-circle ms-2" *ngIf="tipoCuenta === 2"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Nombres</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{'form-input-error':f['nombre']?.invalid && (f['nombre']?.dirty || f['nombre']?.touched)}"
+                    type="text" class="input-sign" formControlName="nombre">
+                  <span *ngIf="f['nombre']?.invalid && (f['nombre']?.dirty || f['nombre']?.touched)" class="form-error">
+                    <span *ngIf="f['nombre']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['nombre']?.errors?.['maxlength']">Límite de caracteres excedido</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Apellidos</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{'form-input-error':f['apellido']?.invalid && (f['apellido']?.dirty || f['apellido']?.touched)}"
+                    type="text" class="input-sign" formControlName="apellido">
+                  <span *ngIf="f['apellido']?.invalid && (f['apellido']?.dirty || f['apellido']?.touched)"
+                    class="form-error">
+                    <span *ngIf="f['apellido']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['apellido']?.errors?.['maxlength']">Límite de caracteres excedido</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Teléfono</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{'form-input-error':f['numeroTelefono']?.invalid && (f['numeroTelefono']?.dirty || f['numeroTelefono']?.touched)}"
+                    type="text" class="input-sign" formControlName="numeroTelefono" maxlength="45">
+                  <span
+                    *ngIf="f['numeroTelefono']?.invalid && (f['numeroTelefono']?.dirty || f['numeroTelefono']?.touched)"
+                    class="form-error">
+                    <span *ngIf="f['numeroTelefono']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['numeroTelefono']?.errors?.['pattern']">Ingrese un número de teléfono valido</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Correo Electrónico</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{'form-input-error':f['email']?.invalid && (f['email']?.dirty || f['email']?.touched)}"
+                    type="text" class="input-sign" formControlName="email" maxlength="100">
+                  <span *ngIf="f['email']?.invalid && (f['email']?.dirty || f['email']?.touched)" class="form-error">
+                    <span *ngIf="f['email']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['email']?.errors?.['pattern']">Ingrese un correo electrónico valido</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Nombre de Usuario</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <input
+                    [ngClass]="{'form-input-error':f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)}"
+                    type="text" class="input-sign" formControlName="username">
+                  <span *ngIf="f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)"
+                    class="form-error">
+                    <span *ngIf="f['username']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['username']?.errors?.['minlength'] || f['username']?.errors?.['maxlength']">
+                      El nombre de usuario debe tener entre 5 y 30 caracteres de longitud
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Contraseña</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9 my-auto">
+                <div class="position-relative">
+                  <input #inputPassword
+                    [ngClass]="{'form-input-error':f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)}"
+                    type="password" class="input-sign" formControlName="password">
+                  <i class="fas fa-eye-slash icon-password" (click)="mostrarPasswords(inputPassword, confirmPassword)"
+                    *ngIf="inputPassword.type === 'password'"></i>
+                  <i class="fas fa-eye icon-password" (click)="mostrarPasswords(inputPassword, confirmPassword)"
+                    *ngIf="inputPassword.type === 'text'"></i>
+                  <span *ngIf="f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)"
+                    class="form-error">
+                    <span *ngIf="f['password']?.errors?.['required']">El campo es requerido</span>
+                    <span *ngIf="f['password']?.errors?.['minlength'] || f['password']?.errors?.['maxlength']">
+                      La contraseña debe tener entre 8 y 30 caracteres de longitud
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto">
+                <label class="form-label mb-3 mb-lg-0">Confirmar Contraseña</label>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9 my-auto">
+                <div class="position-relative">
+                  <input #confirmPassword
+                    [ngClass]="{'form-input-error':f['samePassword']?.invalid && (f['samePassword']?.dirty || f['samePassword']?.touched)}"
+                    type="password" class="input-sign" formControlName="samePassword">
+                  <i class="fas fa-eye-slash icon-password" (click)="mostrarPasswords(inputPassword, confirmPassword)"
+                    *ngIf="inputPassword.type === 'password'"></i>
+                  <i class="fas fa-eye icon-password" (click)="mostrarPasswords(inputPassword, confirmPassword)"
+                    *ngIf="inputPassword.type === 'text'"></i>
+                  <span *ngIf="f['samePassword']?.invalid && (f['samePassword']?.dirty || f['samePassword']?.touched)"
+                    class="form-error">
+                    <span *ngIf="f['samePassword']?.errors?.['required']">El campo es requerido</span>
+                    <span
+                      *ngIf="f['samePassword']?.errors?.['confirmedValidator'] && !f['samePassword']?.errors?.['required']">
+                      Las contraseñas no coinciden
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3 my-auto"></div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="position-relative">
+                  <button type="submit" class="btn mb-1">
+                    Registrarme
+                  </button>
+                  <span *ngIf="!formCompleto" style="font-size: 1rem;" class="form-error">Completar los campos
+                    requeridos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!--Seccion registro exitoso-->
+    <div id="signup-success">
+      <section *ngIf="nombreSeccion === 'signup-success'" id="section-signup-success">
+        <div class="background-box content-text text-center animate__animated animate__bounceIn animate__slow">
+          <i class="far fa-check-circle mb-4" style="font-size: 6rem;color: #07c707;"></i>
+          <h1 class="fw-bold mb-4">¡Registro Exitoso!</h1>
+          <hr style="border: 1px solid;">
+          <p class="mb-4">Te hemos enviado un enlace al correo electrónico <span
+              class="fw-bold">{{f['email']?.value}}</span> para terminar con la configuración de tu
+            cuenta.</p>
+          <a class="btn mb-5">Ir a Inicio de Sesión</a>
+          <div *ngIf="dataUsuario != null" style="font-size: 17px;">
+            <span>¿No recibió el enlace?</span>
+            <a (click)="enlaceCorreo()" class="light-link ms-2">Enviar de nuevo</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!--<section *ngIf="nombreSeccion === 'verification-finished'" id="section-signup-success">
+      <div class="background-box content-text text-center animate__animated animate__bounceIn animate__slow">
+        <i class="fas fa-times mb-4" style="font-size: 6rem;color: #ff0000;"></i>
+        <h1 class="fw-bold mb-4">¡Ocurrio un problema!</h1>
+        <hr style="border: 1px solid;">
+        <p class="mb-4" style="text-align: justify;">Parece que ya has confirmado tu registro. Intenta iniciar sesión con el usuario que registraste.
+          Si olvidaste la contraseña, da clic al enlace "¿Olvidaste la contraseña?" en la página de inicio de sesión.</p>
+        <a class="btn mb-5">Ir a Inicio de Sesión</a>
+      </div>
+    </section>-->
+  </main>
+  <!--Footer component-->
+  <app-footer></app-footer>
+</div>

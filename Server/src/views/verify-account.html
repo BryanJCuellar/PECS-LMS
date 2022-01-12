@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1rem 0rem;
+            width: 700px;
+            max-width: 90%;
+            text-align: justify;
+        }
+
+        p {
+            color: #424242;
+        }
+
+        .light-link {
+            color: #045184;
+        }
+
+        .light-link:hover {
+            color: #00C8E0;
+        }
+
+        .logo-group {
+            display: inline-block;
+            height: 80px;
+            margin-right: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .logo-group img {
+            height: 90px;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
+
+        @media (max-width: 575.98px) {
+            .container {
+                text-align: left;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+        }
+    </style>
+</head>
+
+<body style="margin:0;font-family: Arial, Helvetica, sans-serif;color: #202020;font-size: 18px;">
+    <div style="text-align: center;padding-top: 2.5rem;">
+        <span class="navbar-brand" style=" display: inline-flex;align-items: center;">
+            <img src="cid:logopecs" alt="PECS-img" style="width: 140px;">
+        </span>
+    </div>
+    <div class="container">
+        <h1>Hola {{primerNombre}},</h1>
+        <p style="font-size: 1.5rem;">¡Gracias por registrarte en PECS LMS!</p>
+        <a class="light-link" href="{{frontendHost}}/login/{{idUsuario}}/{{codigoConfirmacion}}">
+            Haz clic aqui para terminar con la activación de tu cuenta
+        </a><br>
+        <p>
+            Este correo electrónico es para confirmar de que el usuario <b>{{nombreUsuario}}</b> se esta
+            registrando para una nueva cuenta.
+        </p>
+    </div>
+    <footer>
+        <div class="container">
+            <div style="text-align:center;margin-bottom: 1rem;">
+                <div class="logo-group">
+                    <img src="cid:logofundaunah" alt="FUNDAUNAH-img">
+                </div>
+                <div class="logo-group">
+                    <a href="https://fcm.unah.edu.hn" target="_blank"><img src="cid:logofcm" alt="FCM-img"></a>
+                </div>
+                <div class="logo-group">
+                    <a href="https://www.unah.edu.hn" target="_blank"><img src="cid:logounah" alt="UNAH-img"></a>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <span style="font-size: 1rem;">
+                    <b>
+                        &copy;
+                        {{anio}} PECS LMS
+                    </b>
+                    <span style="margin-left:8px;">Universidad Nacional Autónoma de Honduras</span>
+                </span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

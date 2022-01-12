@@ -1,0 +1,86 @@
+$color-black: #202020;
+$color-gray: #424242;
+
+@mixin text-gradient($color1, $color2) {
+  background: $color1;
+  background: -webkit-linear-gradient($color1, $color2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes wireMove {
+  from {
+    left: 0px;
+  }
+
+  to {
+    left: 168px;
+  }
+}
+
+.message {
+  font-size: 2rem;
+  font-weight: bold;
+  @include text-gradient($color-black, $color-gray);
+}
+
+hr {
+  color: black;
+  height: 1px;
+  border: none;
+  margin: 0;
+}
+
+.div-icons {
+  padding-top: 100px;
+}
+
+.fa-server,
+.fa-database {
+  font-size: 8rem;
+}
+
+.fa-server {
+  @include text-gradient(#bdc3c7, #2c3e50);
+}
+
+.fa-database {
+  @include text-gradient(#0CAFFF, #0066b2);
+}
+
+.fa-exclamation-triangle {
+  font-size: 2.2rem;
+  @include text-gradient(#FF6700, #FFA368);
+  position: absolute;
+  right: -10px;
+  bottom: -3px;
+  z-index: 1;
+}
+
+.fa-grip-lines {
+  font-size: 1.5rem;
+  @include text-gradient(#202020, #555d50);
+}
+
+.fa-grip-lines.color {
+  @include text-gradient(#32de84, #018749);
+  position: absolute;
+  bottom: 0;
+  animation: wireMove 3s alternate infinite;
+}
+
+@media (max-width: 575.98px) {
+  .message {
+    font-size: 1.5rem;
+  }
+
+  .fa-server,
+  .fa-database {
+    font-size: 6.5rem;
+  }
+
+  .fa-exclamation-triangle {
+    font-size: 1.8rem;
+  }
+}

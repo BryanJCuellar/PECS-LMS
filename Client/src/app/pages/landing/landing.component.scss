@@ -1,0 +1,146 @@
+/*Mixins*/
+@mixin button {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 10px 40px;
+  border: 0px solid white;
+  cursor: pointer;
+}
+
+@mixin paragraph {
+  font-size: 1.25rem;
+
+  @media (max-width: 575.98px) {
+    font-size: 1.1rem;
+  }
+}
+
+/*Carousel*/
+.carousel {
+  z-index: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 270px;
+  }
+
+  .carousel-indicators {
+    margin-bottom: 0.1rem;
+
+    & [data-bs-target] {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 55px;
+    height: 55px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    background-color: #858585b4;
+  }
+
+  .carousel-background {
+    position: relative;
+    text-align: center;
+    color: white;
+    display: block;
+    background: rgba(4, 81, 132, 0.3);
+    background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+    background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+
+    img {
+      position: relative;
+      z-index: -1;
+      display: block;
+    }
+
+    .text-centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      max-width: 100%;
+      /*padding: 35px 0px;*/
+    }
+  }
+
+  #btn-ingresar {
+    @include button();
+    background: rgba(44, 36, 136, 0.902);
+    background: -webkit-linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+    background: linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+
+    &:hover {
+      background: rgba(36, 199, 220, 0.902);
+      background: -webkit-linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+      background: linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+    }
+  }
+}
+
+.segment-one {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 670px;
+  max-width: 95%;
+
+  p {
+    @include paragraph();
+  }
+}
+
+hr {
+  color: #747474;
+}
+
+.segment {
+  button {
+    @include button();
+    background: #24C6DC;
+    background: -webkit-linear-gradient(to right, #045184, #24C6DC);
+    background: linear-gradient(to right, #045184, #24C6DC);
+
+    &:hover {
+      background: #29ddf5;
+      background: -webkit-linear-gradient(to right, #16035a, #2ae6ff);
+      background: linear-gradient(to right, #16035a, #2ae6ff);
+    }
+  }
+
+  p {
+    @include paragraph();
+  }
+}
+
+@media (max-width: 575.98px) {
+  .carousel {
+    .carousel-background h1 {
+      font-size: 1.2rem;
+    }
+
+    #btn-ingresar {
+      font-size: 1rem;
+      padding: 7px 14px;
+    }
+
+    .carousel-indicators {
+      display: none;
+    }
+  }
+
+  .segment {
+    button {
+      font-size: 1.1rem;
+    }
+  }
+
+}

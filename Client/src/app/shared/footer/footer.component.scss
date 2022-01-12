@@ -1,0 +1,47 @@
+footer {
+  .div-logo-text {
+    display: flex;
+    align-items: center;
+  }
+
+  img.logo {
+    width: 100px;
+    object-fit: contain;
+  }
+
+  .text-beside-img {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+
+  .footer-icons a {
+    font-size: 1.4rem;
+    margin-right: 1.5rem;
+  }
+
+  .footer-down {
+    border-top: 1px solid #e8e8e8;
+    font-size: 0.85rem;
+
+    h6 {
+      font-weight: bold;
+    }
+
+    ul {
+      line-height: 2;
+    }
+
+    div.logo-group {
+      display: inline-block;
+      height: 95px;
+      margin-right: 2rem;
+      margin-bottom: 8px;
+
+      img {
+        height: 99px;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+    }
+  }
+}

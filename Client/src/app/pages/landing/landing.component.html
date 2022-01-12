@@ -1,0 +1,79 @@
+<div id="landing-page">
+    <!--Header component-->
+    <app-header></app-header>
+    <main role="main">
+      <section id="landing" class="py-5">
+        <div class="container-md px-0">
+          <!--Carousel-->
+          <div id="carouselLandingControls" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselLandingControls" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselLandingControls" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselLandingControls" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="carousel-background">
+                  <img src="../../../assets/img/Carousel-PECS.jpg" class="d-block w-100" alt="...">
+                  <div class="text-centered">
+                    <h1>BIENVENIDOS A PECS LMS</h1>
+                    <button id="btn-ingresar" class="btn" [routerLink]="['/login']">Ingresar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="../../../assets/img/Carousel-PECS2.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="../../../assets/img/Carousel-PECS3.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLandingControls"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselLandingControls"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <!---->
+          <br>
+          <section class="segment-one mb-5">
+            <h1 class="fw-bold">¿Qué es PECS LMS?</h1><br>
+            <p class="content-text" style="text-align: justify;">
+              <b>PECS LMS</b> es una plataforma educativa del tipo LMS (Learning Management System) que tiene como
+              finalidad ofrecer un espacio de herramientas virtuales para la educación de alta calidad a los profesionales
+              de las ciencias de la salud y afines, que busquen desarrollar competencias, perfeccionar su labor y al mismo
+              tiempo solucionar problemas concretos de salud.
+            </p>
+          </section>
+          <br>
+        </div>
+        <hr>
+        <div class="container-md">
+          <section class="segment my-5">
+            <div class="row align-items-center">
+              <div class="col-12 col-md-6 text-center pe-md-3 mb-3 mb-md-0">
+                <h1 class="fw-bold">Bienvenido a la familia PECS</h1><br>
+                <p class="content-text" style="text-align: justify;">Comienza hoy con tu aventura hacia un mejor
+                  aprendizaje en materia de salud.</p>
+                  <button id="btn-ingresar" class="btn" [routerLink]="['/signup']">Únete a PECS</button>
+              </div>
+              <div class="col-12 col-md-6 text-center">
+                <img class="img-fluid rounded" src="../../../assets/img/e-learning.jpg" alt="">
+              </div>
+            </div>
+          </section>
+          <br>
+        </div>
+      </section>
+    </main>
+    <!--Footer component-->
+    <app-footer></app-footer>
+  </div>  

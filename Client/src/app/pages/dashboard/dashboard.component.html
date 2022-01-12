@@ -1,0 +1,121 @@
+<div id="dashboard-page">
+  <div class="page-wrapper page-sidebar" [ngClass]="{'toggled' : toggledSidebar}">
+    <!--Sidebar-->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <ng-scrollbar [autoHeightDisabled]="false" visibility="hover">
+          <div class="sidebar-header">
+            <a class="text-center" href="#">
+              <img src="../../../assets/img/logos/Logo-PECS.webp" alt="">
+            </a>
+          </div>
+          <div class="sidebar-menu">
+            <ul>
+              <li>
+                <a href="dashboard">
+                  <div class="sidebar-item-container">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Tablero</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="dashboard">
+                  <div class="sidebar-item-container">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendario</span>
+                  </div>
+                </a>
+              </li>
+              <li class="sidebar-dropdown">
+                <a (click)="toggleProgramsMenu()" [ngClass]="{'toggled':toggledProgramsMenu}">
+                  <div class="sidebar-item-container">
+                    <i class="fas fa-university"></i>
+                    <span>Mis Programas</span>
+                  </div>
+                </a>
+                <div class="sidebar-submenu" [@slide]="getStateProgramsMenu()">
+                  <ul>
+                    <li>
+                      <a>
+                        <div class="sidebar-item-container">
+                          <i class="fas fa-graduation-cap"></i>
+                          <span>
+                            Programa Diplomado Medicina del Deporte
+                          </span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <div class="sidebar-item-container">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Nutricion Deportiva</span>
+                      </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </ng-scrollbar>
+      </div>
+    </nav>
+    <!--Page Content-->
+    <main class="page-content">
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-light nav-dashboard">
+        <div class="container-fluid justify-content-between px-3 px-lg-4">
+          <button class="btn btn-toggle d-inline-block" (click)="toggleSidebar()">
+            <i class="fas fa-toggle-off" *ngIf="toggledSidebar"></i>
+            <i class="fas fa-toggle-on" *ngIf="!toggledSidebar"></i>
+          </button>
+          <a class="navbar-brand ms-4">
+            <div class="div-logo-text">
+              <img *ngIf="toggledSidebar" [@fadeInOut] class="d-none d-sm-inline-block"
+                src="../../../assets/img/logos/Logo-PECS.webp" alt="">
+              <span class="text-beside-img fs-4 ms-2">PECS LMS</span>
+            </div>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPanel"
+            aria-controls="navbarPanel" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse py-3 py-lg-0" id="navbarPanel">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item text-center mb-3 my-lg-auto">
+                <button class="btn btn-notification">
+                  <i class="far fa-bell"></i>
+                </button>
+              </li>
+              <li class="nav-item text-center dropdown">
+                <a class="btn dropdown-toggle" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" title="Perfil de usuario">
+                  <span class="text-uppercase fw-bold d-none d-lg-inline-block">Gisele Marie-Louise Marguerite LaFleche</span>
+                  <img class="ms-2" src="../../../assets/img/users/Anonymous.png" alt="Profile-img">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPanel">
+                  <li class="d-block d-lg-none" style="text-align: center;color: white;">Gisele Marie-Louise Marguerite LaFleche</li>
+                  <li class="d-block d-lg-none">
+                    <hr class="dropdown-divider text-white">
+                  </li>
+                  <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar Sesión<i
+                        class="fas fa-sign-in-alt ms-2"></i></a></li>
+                  <li>
+                    <hr class="dropdown-divider text-white">
+                  </li>
+                  <li><a class="dropdown-item btn" [routerLink]="['/signup']">Cerrar Sesión<i
+                        class="fas fa-user-plus ms-2"></i></a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="py-5"></div>
+      <app-footer></app-footer>
+      <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSidebarState()}"></div>
+    </main>
+  </div>
+</div>

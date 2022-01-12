@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+/*Variables*/
+$font-family: 'Lato',
+sans-serif;
+$font-family2: 'Open Sans',
+sans-serif;
+$color-black: #202020;
+$color-gray: #424242;
+$color-yellow: #FFCC00;
+$color-lightblue: #00C8E0;
+$color-red1: #FF0033;
+$color-red2:#FF0020;
+/*Paleta de colores*/
+$color-logo1: #2b6ca3;
+$color-logo2: #045184;
+$color-logo3:#5BC9DE;
+$color-logo4: #48A8D4;
+$color-logo5: #9CCFE9;
+
+/*Mixins*/
+@mixin link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@mixin unselectableText {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  color: $color-black;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+/*Custom Scrollbar*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #303030;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #C0C0C0;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #989898;
+}
+
+/*Div centrado verticalmente (Ocupa un elemento padre con display:table)*/
+.div-center-y {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+a {
+  @include link();
+
+  &,
+  &:hover {
+    color: inherit;
+  }
+}
+
+nav a,
+button,
+img {
+  @include unselectableText();
+}
+
+ul {
+  padding-left: 0rem;
+}
+
+li {
+  list-style: none;
+}
+
+/*Background*/
+.nav-bg {
+  background-color: $color-logo2;
+  background: -webkit-linear-gradient(to bottom, $color-logo2, $color-logo1);
+  background: linear-gradient(to bottom, $color-logo2, $color-logo1);
+}
+
+.footer-bg {
+  background-color: #ffffff;
+  border-top: 1px solid #d8d8d8;
+  -webkit-transition: border-color .15s ease-in-out;
+  transition: border-color .15s ease-in-out;
+}
+
+/*Colores*/
+.yellow-text {
+  color: $color-yellow;
+}
+
+.title-text {
+  color: $color-logo1;
+}
+
+.title-text-2 {
+  color: $color-logo2;
+}
+
+.content-text {
+  color: $color-gray;
+}
+
+/*Enlaces*/
+.light-link,
+.dark-link {
+  @include link();
+}
+
+.light-link {
+  color: inherit;
+
+  &:hover {
+    color: $color-lightblue !important;
+  }
+}
+
+.dark-link {
+  color: white !important;
+}
+
+/*For setting a text beside img*/
+.div-logo-text {
+  display: flex;
+  align-items: center;
+}
+
+.text-beside-img {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+/*Footer on sidebar page*/
+.page-sidebar {
+  .inside-footer {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  &.toggled .inside-footer {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/*Reactive forms*/
+.form-required {
+  color: $color-red1;
+}
+
+.form-error {
+  color: $color-red1;
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 1.5;
+  position: absolute;
+  left: 5px;
+  top: 102%;
+  white-space: nowrap;
+}
+
+.form-input-error {
+  border-color: $color-red2 !important;
+}
+
+.form-input-error:focus {
+  outline: 0px !important;
+  border-color: $color-red2 !important;
+  box-shadow: 0 0 0 0.15rem #ff0020bf !important;
+}

@@ -1,0 +1,61 @@
+<header>
+  <!--Contenedor logo-->
+  <div class="container-fluid clearfix py-4">
+    <section class="div-logo-header text-center">
+      <a [routerLink]="['/home']">
+        <img class="logo" src="../../../assets/img/logos/Logo-PECS.webp" alt="PECS-img">
+      </a>
+      <div class="title-text mt-3">
+        <h2 class="fw-bold">PROGRAMA DE</h2>
+        <h2 class="fw-bold">EDUCACIÓN CONTINUA</h2>
+        <h2 class="fw-bold">EN SALUD</h2>
+      </div>
+    </section>
+  </div>
+  <!--Navbar-->
+  <div class="sticky-nav-wrapper">
+    <nav class="navbar navbar-expand-md navbar-dark nav-bg sticky-nav" ngStickyNav>
+      <div class="container-md justify-content-between px-0">
+        <a class="navbar-brand d-md-none" [routerLink]="['/home']"><i class="fas fa-home"
+            style="font-size: 1.25rem;"></i></a>
+        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+          aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav navbar-nav-scroll" style="--bs-scroll-height: 250px;">
+            <li class="nav-item">
+              <a [ngClass]="{'active':listItemActivo === 'home'}" class="nav-custom-link" [routerLink]="['/home']"><i
+                  class="fas fa-home d-none d-md-inline-block me-2"></i>Página
+                principal</a>
+            </li>
+            <!--For mobiles-->
+            <li class="nav-item d-inline-block d-md-none">
+              <a class="nav-custom-link" [routerLink]="['/login']">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item d-inline-block d-md-none">
+              <a [ngClass]="{'active':listItemActivo === 'signup'}" class="nav-custom-link"
+                [routerLink]="['/signup']">Únete a PECS</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto d-none d-md-inline-block">
+            <li class="nav-item dropdown">
+              <a class="nav-custom-link dropdown-toggle" id="navbarDropdownMain" role="button" aria-expanded="false">
+                Acceder<i class="fas fa-sign-in-alt ms-2"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMain">
+                <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar Sesión<i
+                      class="fas fa-sign-in-alt ms-2"></i></a></li>
+                <li>
+                  <hr class="dropdown-divider text-white">
+                </li>
+                <li><a class="dropdown-item" [routerLink]="['/signup']">Únete a PECS<i
+                      class="fas fa-user-plus ms-2"></i></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
