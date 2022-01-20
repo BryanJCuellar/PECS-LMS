@@ -1,7 +1,7 @@
 // Creacion de aplicacion express
-var app = require('./app');
+const app = require('./app');
 
-var http = require('http');
+const http = require('http');
 
 const server = http.Server(app);
 

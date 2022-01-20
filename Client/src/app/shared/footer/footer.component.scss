@@ -1,3 +1,42 @@
+/*Swing*/
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(20deg);
+  }
+
+  30% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(-20deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(10deg);
+  }
+
+  70% {
+    transform: rotate(0deg);
+  }
+
+  80% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 footer {
   .div-logo-text {
     display: flex;
@@ -17,6 +56,10 @@ footer {
   .footer-icons a {
     font-size: 1.4rem;
     margin-right: 1.5rem;
+
+    &:hover>i {
+      animation: swing ease-in-out .7s 1 alternate;
+    }
   }
 
   .footer-down {

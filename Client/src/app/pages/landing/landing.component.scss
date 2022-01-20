@@ -71,18 +71,18 @@
       /*padding: 35px 0px;*/
     }
   }
+}
 
-  #btn-ingresar {
-    @include button();
-    background: rgba(44, 36, 136, 0.902);
-    background: -webkit-linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
-    background: linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+#btn-ingresar {
+  @include button();
+  background: rgba(44, 36, 136, 0.902);
+  background: -webkit-linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+  background: linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
 
-    &:hover {
-      background: rgba(36, 199, 220, 0.902);
-      background: -webkit-linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
-      background: linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
-    }
+  &:hover {
+    background: rgba(36, 199, 220, 0.902);
+    background: -webkit-linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+    background: linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
   }
 }
 
@@ -127,14 +127,14 @@ hr {
       font-size: 1.2rem;
     }
 
-    #btn-ingresar {
-      font-size: 1rem;
-      padding: 7px 14px;
-    }
-
     .carousel-indicators {
       display: none;
     }
+  }
+
+  #btn-ingresar {
+    font-size: 1rem;
+    padding: 7px 14px;
   }
 
   .segment {

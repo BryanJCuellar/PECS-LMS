@@ -6,5 +6,6 @@ module.exports = {
         database: 'pecs_lms',
         port: 3306,
         multipleStatements: true
+        /*connectionLimit: 100*/
     }
 }

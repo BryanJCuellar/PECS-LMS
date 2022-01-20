@@ -39,20 +39,32 @@
                     alt="PECS-img"></a>
               </div>
               <h1 class="mb-3">Inicio de Sesión</h1>
-              <form class="form-border-bottom">
+              <form [formGroup]="formularioLogin" (ngSubmit)="checkLoginType()">
                 <div class="div-input mb-4">
                   <i class="fas fa-user icon-input"></i>
-                  <input type="text" class="input-login" required>
+                  <input
+                    [ngClass]="{'input-border-bottom-error':f['userEmail']?.invalid && (f['userEmail']?.dirty || f['userEmail']?.touched)}"
+                    type="text" class="input-login" formControlName="userEmail" required>
                   <span class="floating-label">Usuario o correo electrónico</span>
+                  <span *ngIf="f['userEmail']?.invalid && (f['userEmail']?.dirty || f['userEmail']?.touched)"
+                    class="form-error dark">
+                    <span *ngIf="f['userEmail']?.errors?.['required']">El campo es requerido</span>
+                  </span>
                 </div>
                 <div class="div-input mb-2">
                   <i class="fas fa-lock icon-input"></i>
-                  <input type="password" class="input-login" #inputPassword required>
+                  <input
+                    [ngClass]="{'input-border-bottom-error':f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)}"
+                    #inputPassword type="password" class="input-login" formControlName="password" required>
                   <span class="floating-label">Contraseña</span>
-                  <i class="fas fa-eye-slash icon-password" (click)="cambiarInput(inputPassword)"
+                  <i class="fas fa-eye-slash icon-password" (click)="mostrarPassword(inputPassword)"
                     *ngIf="inputPassword.type === 'password'"></i>
-                  <i class="fas fa-eye icon-password" (click)="cambiarInput(inputPassword)"
+                  <i class="fas fa-eye icon-password" (click)="mostrarPassword(inputPassword)"
                     *ngIf="inputPassword.type === 'text'"></i>
+                  <span *ngIf="f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)"
+                    class="form-error dark">
+                    <span *ngIf="f['password']?.errors?.['required']">El campo es requerido</span>
+                  </span>
                 </div>
                 <div class="clearfix mb-4">
                   <a class="dark-link float-end" href="#">¿Olvidaste la contraseña?</a>
@@ -71,5 +83,9 @@
         </section>
       </div>
     </div>
+  </div>
+  <!--Spinner-->
+  <div class="loading-container" [ngClass]="{'show': asyncReq}">
+    <div class="loader" [ngClass]="{'show': asyncReq}"></div>
   </div>
 </div>

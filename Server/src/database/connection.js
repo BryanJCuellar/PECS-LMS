@@ -4,11 +4,11 @@ var keys = require('./keys');
 const pool = mysql.createPool(keys.database);
 
 pool.getConnection((err, connection) => {
-    if(err){
-        console.log('Error en la base de datos: ', err);
+    if (err) {
+        console.log('Database connection error: ', err);
         return;
     }
-    if(connection){
+    if (connection) {
         connection.release();
         console.log('Database Call Successful');
     }

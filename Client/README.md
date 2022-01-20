@@ -7,9 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 alertifyjs
 express
 ng2-sticky-nav
-ngx-perfect-scrollbar
+ngx-scrollbar
 path
-sweetalert2
 
 ## Development server
 

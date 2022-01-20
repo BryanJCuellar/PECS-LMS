@@ -49,9 +49,9 @@
                     <li>
                       <a>
                         <div class="sidebar-item-container">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Nutricion Deportiva</span>
-                      </div>
+                          <i class="fas fa-graduation-cap"></i>
+                          <span>Nutricion Deportiva</span>
+                        </div>
                       </a>
                     </li>
                   </ul>
@@ -92,11 +92,13 @@
               <li class="nav-item text-center dropdown">
                 <a class="btn dropdown-toggle" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false" title="Perfil de usuario">
-                  <span class="text-uppercase fw-bold d-none d-lg-inline-block">Gisele Marie-Louise Marguerite LaFleche</span>
+                  <span class="text-uppercase fw-bold d-none d-lg-inline-block">{{sessionUser?.nombreUsuario}}</span>
                   <img class="ms-2" src="../../../assets/img/users/Anonymous.png" alt="Profile-img">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPanel">
-                  <li class="d-block d-lg-none" style="text-align: center;color: white;">Gisele Marie-Louise Marguerite LaFleche</li>
+                  <li class="d-block d-lg-none" style="text-align:center;text-transform:uppercase;color:white;">
+                    {{sessionUser?.nombreUsuario}}
+                  </li>
                   <li class="d-block d-lg-none">
                     <hr class="dropdown-divider text-white">
                   </li>
@@ -105,7 +107,7 @@
                   <li>
                     <hr class="dropdown-divider text-white">
                   </li>
-                  <li><a class="dropdown-item btn" [routerLink]="['/signup']">Cerrar Sesión<i
+                  <li><a class="dropdown-item btn" (click)="logout()">Cerrar Sesión<i
                         class="fas fa-user-plus ms-2"></i></a></li>
                 </ul>
               </li>

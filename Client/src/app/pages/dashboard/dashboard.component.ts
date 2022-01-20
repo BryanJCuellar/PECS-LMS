@@ -1,7 +1,11 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { SidebarService } from 'src/app/services/sidebar.service';
+import { ActivatedRoute, Router } from '@angular/router';
+// Services
+import { AlertifyService } from 'src/app/services/alertify.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,19 +28,23 @@ import { SidebarService } from 'src/app/services/sidebar.service';
     ])
   ]
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
-  menus: any = [];
+export class DashboardComponent implements OnInit {
   // toggled = false means that the element is shown
   toggledSidebar = false;
   toggledProgramsMenu = false;
+  // Usuario en sesion
+  sessionUser: any;
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    public sidebarservice: SidebarService
-  ) {
-    this.menus = sidebarservice.getMenuList();
-  }
+    private alertifyService: AlertifyService,
+    private authService: AuthService,
+    private usersService: UsersService
+  ) { }
 
   ngOnInit(): void {
+    // Show sidebar according to the match
     this.breakpointObserver
       .observe(['(max-width: 767.98px)'])
       .subscribe((state: BreakpointState) => {
@@ -48,28 +56,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.toggledSidebar = false;
         }
       });
+    this.authService.getSessionUser()
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.sessionUser = res?.data;
+      }
+    })
   }
-
-  ngAfterViewInit(): void {
-
-  }
-
-  /*toggle(currentMenu) {
-    if (currentMenu.type === 'dropdown') {
-      this.menus.forEach(element => {
-        if (element === currentMenu) {
-          currentMenu.active = !currentMenu.active;
-        } else {
-          element.active = false;
-        }
-      });
-    }
-  }
-
-   toggle() {
-    this.toggled = !this.toggled;
-  }
-  */
 
   toggleProgramsMenu() {
     this.toggledProgramsMenu = !this.toggledProgramsMenu;
@@ -93,6 +87,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   toggleSidebar() {
     this.setSidebarState(!this.getSidebarState());
+  }
+
+  logout(){
+    this.authService.logoutUser()
+    .subscribe({
+      next: (res) => {
+        if(res.message == 'Logout exitoso'){
+          this.alertifyService.success(res.message);
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
 }

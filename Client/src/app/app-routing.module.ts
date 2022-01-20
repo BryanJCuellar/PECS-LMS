@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { title: 'PECS LMS - Iniciar sesión' } },
   { path: 'login/:idUsuario/:codigo', component: LoginComponent, data: { title: 'Activación de Cuenta' } },
   { path: 'signup', component: SignupComponent, data: { title: 'PECS LMS - Registro' } },
-  { path: 'signup/:idUsuario', component: SignupComponent, data: { title: 'Registro exitoso' } },
+  { path: 'signup/:idUsuario/:codigo', component: SignupComponent, data: { title: 'Registro exitoso' } },
   { path: 'dashboard', component: DashboardComponent, data: { title: 'Tablero' } },
   { path: '404', component: NotFoundComponent, data: { title: '404 Not Found' } },
   { path: '503', component: ServerErrorComponent, data: { title: '503 Service Unavailable' } },

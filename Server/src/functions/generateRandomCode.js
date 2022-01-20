@@ -23,4 +23,4 @@ module.exports = function (length, type) {
         }
     }
     return code;
-};
+}

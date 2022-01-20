@@ -67,6 +67,8 @@ hr {
   @include text-gradient(#32de84, #018749);
   position: absolute;
   bottom: 0;
+  -webkit-animation: wireMove 3s alternate infinite;
+  -moz-animation: wireMove 3s alternate infinite;
   animation: wireMove 3s alternate infinite;
 }
 

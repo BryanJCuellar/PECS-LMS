@@ -18,36 +18,36 @@ $color-logo3:#5BC9DE;
 .col-info-login {
   padding: 0px;
   box-shadow: 0px 0px 7rem inset #e9f0f1;
+}
 
-  #div-info-login {
-    width: 100%;
-    padding: 0px 10px;
-    text-align: center;
-    /*Para centrar elementos hijos*/
-    display: table;
+#div-info-login {
+  width: 100%;
+  padding: 0px 10px;
+  text-align: center;
+  /*Para centrar elementos hijos*/
+  display: table;
 
-    /*Div centrado verticalmente*/
-    .div-center-y {
-      display: table-cell;
-      vertical-align: middle;
-    }
+  /*Div centrado verticalmente*/
+  .div-center-y {
+    display: table-cell;
+    vertical-align: middle;
+  }
 
-    ul li {
-      font-size: 13px;
-      line-height: 1.4;
-    }
+  ul li {
+    font-size: 13px;
+    line-height: 1.4;
+  }
 
-    div.logo-group {
-      display: inline-block;
+  div.logo-group {
+    display: inline-block;
+    height: 95px;
+    margin-right: 2rem;
+    margin-bottom: 8px;
+
+    img {
       height: 95px;
-      margin-right: 2rem;
-      margin-bottom: 8px;
-
-      img {
-        height: 95px;
-        object-fit: cover;
-        object-position: 50% 50%;
-      }
+      object-fit: cover;
+      object-position: 50% 50%;
     }
   }
 }
@@ -56,135 +56,141 @@ $color-logo3:#5BC9DE;
   padding: 0px;
   background: $color-logo1;
   background: radial-gradient(circle, $color-logo1 10%, $color-logo2 100%);
+}
 
-  #div-login {
-    width: 100%;
-    padding: 0px 70px;
-    display: table;
+#div-login {
+  width: 100%;
+  padding: 0px 70px;
+  display: table;
+  position: relative;
+  color: white;
+}
+
+#login {
+  max-width: 100%;
+  padding: 30px 30px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  /*Relative parent for floating label absolute*/
+  .div-input {
     position: relative;
-    color: white;
 
-    #login {
-      max-width: 100%;
-      padding: 30px 30px;
-      margin-left: auto;
-      margin-right: auto;
+    .input-login {
+      width: 100%;
+      background-color: transparent;
+      padding: 15px 40px 10px 25px;
+      color: white;
+      border-width: 0 0 2px;
+      border-color: white;
+      border-radius: 0px;
+      outline: 0;
+      font-size: 18px;
+    }
 
-      h1 {
-        text-align: center;
-        font-weight: 700;
-      }
+    .input-login:focus~.floating-label,
+    .input-login:not(:focus):valid~.floating-label {
+      top: -5px;
+      bottom: -5px;
+      left: 5px;
+      font-size: 11px;
+      opacity: 1;
+    }
 
-      /*Relative parent for floating label absolute*/
-      .div-input {
-        position: relative;
+    .floating-label {
+      position: absolute;
+      pointer-events: none;
+      left: 25px;
+      top: 15px;
+      font-size: 18px;
+      transition: 0.2s ease all;
+    }
 
-        .input-login {
-          width: 100%;
-          background-color: transparent;
-          padding: 15px 40px 10px 25px;
-          color: white;
-          border-width: 0 0 2px;
-          border-color: white;
-          border-radius: 0px;
-          outline: 0;
-          font-size: 18px;
-        }
+    i.icon-input {
+      position: absolute;
+      left: 0;
+      top: 20px;
+    }
 
-        .input-login:focus~.floating-label,
-        .input-login:not(:focus):valid~.floating-label {
-          top: -5px;
-          bottom: -5px;
-          left: 5px;
-          font-size: 11px;
-          opacity: 1;
-        }
-
-        .floating-label {
-          position: absolute;
-          pointer-events: none;
-          left: 25px;
-          top: 15px;
-          font-size: 18px;
-          transition: 0.2s ease all;
-        }
-
-        i.icon-input {
-          position: absolute;
-          left: 0;
-          top: 20px;
-        }
-
-        i.icon-password {
-          margin-left: -35px;
-          cursor: pointer;
-          font-size: 18px;
-        }
-      }
-
-      button {
-        width: 100%;
-        background-color: #25a2cf;
-        color: white;
-        font-size: 1.2rem;
-        font-weight: 700;
-        padding: 11px;
-        border: 0px solid white;
-        border-radius: 2px;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #28b1e2;
-          box-shadow: 0px 0px 2px inset#9CCFE9;
-        }
-      }
-
-      .dark-link {
-        font-size: 13px;
-
-        &:hover {
-          color: $color-yellow !important;
-        }
-      }
+    i.icon-password {
+      margin-left: -35px;
+      cursor: pointer;
+      font-size: 18px;
     }
   }
 
+  button {
+    width: 100%;
+    background-color: #25a2cf;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 11px;
+    border: 0px solid white;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #28b1e2;
+      box-shadow: 0px 0px 2px inset#9CCFE9;
+    }
+  }
+
+  .dark-link {
+    font-size: 13px;
+
+    &:hover {
+      color: $color-yellow !important;
+    }
+  }
+}
+
+.form-error{
+  color: #f17474;
+  font-size: 1rem;
+}
+
+.input-border-bottom-error {
+  border-color: #f92c46 !important;
+
+  &:focus {
+    outline: 0 !important;
+    border-color: #f92c46 !important;
+    box-shadow: none !important;
+  }
 }
 
 /* Responsive */
 @media (max-width: 575.98px) {
-  .col-login {
-    #div-login {
-      padding: 0 10px;
+  #div-login {
+    padding: 0 10px;
+  }
 
-      #login {
-        padding: 20px;
-      }
-    }
+  #login {
+    padding: 20px;
   }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .col-login {
-    #div-login {
-      padding: 0 30px;
-    }
+  #div-login {
+    padding: 0 30px;
   }
 }
 
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .col-login {
-    #div-login {
-      padding: 0 100px;
-    }
+  #div-login {
+    padding: 0 100px;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  .col-login {
-    #div-login {
-      padding: 0 30px;
-    }
+  #div-login {
+    padding: 0 30px;
   }
 }

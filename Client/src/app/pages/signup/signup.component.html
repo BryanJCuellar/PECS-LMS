@@ -94,11 +94,14 @@
               <div class="col-12 col-md-12 col-lg-9">
                 <div class="position-relative">
                   <input
-                    [ngClass]="{'form-input-error':f['email']?.invalid && (f['email']?.dirty || f['email']?.touched)}"
-                    type="text" class="input-sign" formControlName="email" maxlength="100">
+                    [ngClass]="{'form-input-error':(f['email']?.invalid && (f['email']?.dirty || f['email']?.touched)) || emailDuplicado}"
+                    type="text" class="input-sign" formControlName="email" maxlength="100" (keyup)="validarEmail()">
                   <span *ngIf="f['email']?.invalid && (f['email']?.dirty || f['email']?.touched)" class="form-error">
                     <span *ngIf="f['email']?.errors?.['required']">El campo es requerido</span>
                     <span *ngIf="f['email']?.errors?.['pattern']">Ingrese un correo electrónico valido</span>
+                  </span>
+                  <span *ngIf="emailDuplicado && f['email']?.valid" class="form-error">
+                    <span>Este correo ya esta en uso. Elige otro.</span>
                   </span>
                 </div>
               </div>
@@ -112,14 +115,17 @@
               <div class="col-12 col-md-12 col-lg-9">
                 <div class="position-relative">
                   <input
-                    [ngClass]="{'form-input-error':f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)}"
-                    type="text" class="input-sign" formControlName="username">
+                    [ngClass]="{'form-input-error':(f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)) || usernameDuplicado}"
+                    type="text" class="input-sign" formControlName="username" (keyup)="validarUsername()">
                   <span *ngIf="f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)"
                     class="form-error">
                     <span *ngIf="f['username']?.errors?.['required']">El campo es requerido</span>
                     <span *ngIf="f['username']?.errors?.['minlength'] || f['username']?.errors?.['maxlength']">
                       El nombre de usuario debe tener entre 5 y 30 caracteres de longitud
                     </span>
+                  </span>
+                  <span *ngIf="usernameDuplicado && f['username']?.valid" class="form-error">
+                    <span>Este nombre de usuario ya esta en uso. Elige otro.</span>
                   </span>
                 </div>
               </div>
@@ -167,8 +173,7 @@
                   <span *ngIf="f['samePassword']?.invalid && (f['samePassword']?.dirty || f['samePassword']?.touched)"
                     class="form-error">
                     <span *ngIf="f['samePassword']?.errors?.['required']">El campo es requerido</span>
-                    <span
-                      *ngIf="f['samePassword']?.errors?.['confirmedValidator'] && !f['samePassword']?.errors?.['required']">
+                    <span *ngIf="f['samePassword']?.errors?.['matching'] && !f['samePassword']?.errors?.['required']">
                       Las contraseñas no coinciden
                     </span>
                   </span>
@@ -184,8 +189,9 @@
                   <button type="submit" class="btn mb-1">
                     Registrarme
                   </button>
-                  <span *ngIf="!formCompleto" style="font-size: 1rem;" class="form-error">Completar los campos
-                    requeridos</span>
+                  <span *ngIf="!formCompleto" style="font-size: 1rem;" class="form-error">
+                    Completar los campos requeridos
+                  </span>
                 </div>
               </div>
             </div>
@@ -200,27 +206,20 @@
           <i class="far fa-check-circle mb-4" style="font-size: 6rem;color: #07c707;"></i>
           <h1 class="fw-bold mb-4">¡Registro Exitoso!</h1>
           <hr style="border: 1px solid;">
-          <p class="mb-4">Te hemos enviado un enlace al correo electrónico <span
-              class="fw-bold">{{f['email']?.value}}</span> para terminar con la configuración de tu
-            cuenta.</p>
-          <a class="btn mb-5">Ir a Inicio de Sesión</a>
+          <p class="mb-4">
+            Revise por favor su correo electrónico para terminar con la configuración de tu cuenta.
+          </p>
           <div *ngIf="dataUsuario != null" style="font-size: 17px;">
             <span>¿No recibió el enlace?</span>
-            <a (click)="enlaceCorreo()" class="light-link ms-2">Enviar de nuevo</a>
+            <a (click)="enviarEnlaceEmail()" class="light-link ms-2">Enviar de nuevo</a>
           </div>
         </div>
       </section>
     </div>
-    <!--<section *ngIf="nombreSeccion === 'verification-finished'" id="section-signup-success">
-      <div class="background-box content-text text-center animate__animated animate__bounceIn animate__slow">
-        <i class="fas fa-times mb-4" style="font-size: 6rem;color: #ff0000;"></i>
-        <h1 class="fw-bold mb-4">¡Ocurrio un problema!</h1>
-        <hr style="border: 1px solid;">
-        <p class="mb-4" style="text-align: justify;">Parece que ya has confirmado tu registro. Intenta iniciar sesión con el usuario que registraste.
-          Si olvidaste la contraseña, da clic al enlace "¿Olvidaste la contraseña?" en la página de inicio de sesión.</p>
-        <a class="btn mb-5">Ir a Inicio de Sesión</a>
-      </div>
-    </section>-->
+    <!--Spinner-->
+    <div class="loading-container" [ngClass]="{'show': asyncReq}">
+      <div class="loader" [ngClass]="{'show': asyncReq}"></div>
+    </div>
   </main>
   <!--Footer component-->
   <app-footer></app-footer>
