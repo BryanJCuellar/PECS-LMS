@@ -28,6 +28,14 @@ export class AuthService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+  // Preguntar si existe un usuario en sesion
+  isLoggedIn(): Observable<any> {
+    return this.httpClient.get(`${this.backendHost}/users/isLoggedIn`, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
+  }
   // Informacion usuario logueado
   getSessionUser(): Observable<any> {
     return this.httpClient.get(`${this.backendHost}/users/sessionUser`, {
@@ -37,7 +45,7 @@ export class AuthService {
     });
   }
   /***Logout***/
-  logoutUser(): Observable<any>{
+  logoutUser(): Observable<any> {
     return this.httpClient.get(`${this.backendHost}/users/logout`, {
       observe: 'body',
       withCredentials: true,

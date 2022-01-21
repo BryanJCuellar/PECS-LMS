@@ -8,6 +8,9 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { ServerErrorComponent } from './error/server-error/server-error.component';
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { CheckLoginGuard } from './guards/check-login.guard';
 
 const scrollOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled', // or 'top'

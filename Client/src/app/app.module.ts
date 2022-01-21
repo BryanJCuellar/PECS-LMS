@@ -9,14 +9,11 @@ import { AppComponent } from './app.component';
 // Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 // Services
 import { HttpErrorInterceptorService } from './services/httperror-interceptor.service';
-
 // External
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-
 // Components
 import { LandingComponent } from './pages/landing/landing.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -26,6 +23,9 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { ServerErrorComponent } from './error/server-error/server-error.component';
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { CheckLoginGuard } from './guards/check-login.guard';
 
 @NgModule({
   declarations: [
@@ -52,6 +52,8 @@ import { ServerErrorComponent } from './error/server-error/server-error.componen
   ],
   providers: [
     Title,
+    AuthGuard,
+    CheckLoginGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptorService,

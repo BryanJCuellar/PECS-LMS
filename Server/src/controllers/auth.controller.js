@@ -35,14 +35,16 @@ function authController(passport) {
                     errorMessage: err
                 });
             }
-            return res.status(200).clearCookie('connect.sid', {path: '/'}).send({
+            return res.status(200).clearCookie('connect.sid', {
+                path: '/'
+            }).send({
                 message: 'Logout exitoso'
             });
         });
     };
 
     // Verificar si existe un usuario en sesion antes de que acceda a un recurso en el que se requiera estar logueado
-    controllerMethods.isLoggedIn = (req, res, next) => {
+    controllerMethods.verifySession = (req, res, next) => {
         if (req.isAuthenticated()) {
             // Si hay usuario en sesion, prosigue con el recurso solicitado
             next();
@@ -50,6 +52,19 @@ function authController(passport) {
             return res.status(401).send('Inicia sesión para acceder a este recurso');
         }
     };
+    
+    // Preguntar si existe un usuario en sesion
+    controllerMethods.isLoggedIn = (req, res) => {
+        if (req.isAuthenticated()) {
+            return res.send({
+                loggedIn: true
+            });
+        } else {
+            return res.send({
+                loggedIn: false
+            });
+        }
+    }
     return controllerMethods;
 }
 

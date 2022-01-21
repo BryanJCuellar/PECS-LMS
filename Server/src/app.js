@@ -21,10 +21,13 @@ dotenv.config({
 const passport = require('passport');
 // Configuracion de passport
 require('./config/passport')(pool, passport);
+// Hora en milisegundos
+const ONE_HOUR = 1000 * 60 * 60;
 // Configuracion de sesion
 var sessionStore = new MySQLStore({
     clearExpired: true,
-    expiration: 86400000,
+    checkExpirationInterval: ONE_HOUR,
+    expiration: 60000, // 1 Minute
     createDatabaseTable: true,
     schema: {
         tableName: 'Sessions',
@@ -37,16 +40,17 @@ var sessionStore = new MySQLStore({
 }, pool);
 var sessionOptions = {
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
+    rolling: true,
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-        maxAge: 86400000,
+        maxAge: ONE_HOUR,
         httpOnly: false,
         secure: false
     }
 };
-
+// Si el entorno es de produccion
 if (app.get('env') === 'production') {
     // app.set('trust proxy', 1) // trust first proxy
     sessionOptions.cookie.secure = true // serve secure cookies
