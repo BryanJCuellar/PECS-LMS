@@ -24,7 +24,7 @@ $color-logo5: #9CCFE9;
   cursor: pointer;
   text-decoration: none;
 }
-
+/*No seleccionar texto*/
 @mixin unselectableText {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -80,7 +80,7 @@ html {
     transform: rotate(360deg);
   }
 }
-
+/*Icono de carga*/
 .loading-container {
   position: fixed;
   top: 0;

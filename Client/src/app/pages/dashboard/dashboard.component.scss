@@ -57,6 +57,7 @@ $hover-color:#ffffff;
     }
 
     .nav-dashboard {
+      padding: 6px 0px;
       border-bottom: 1px solid #e8e8e8;
 
       .btn-toggle {
@@ -74,21 +75,28 @@ $hover-color:#ffffff;
         margin: 0rem 0.5rem;
       }
 
-      .btn-notification:focus,
-      .btn-notification:hover,
-      .btn-notification:active {
-        background-color: #ececec;
+      .btn-notification {
+        padding: 8px 12px;
+
+        &:focus,
+        &:hover,
+        &:active {
+          background-color: #ececec;
+        }
       }
 
       .dropdown {
-        &:hover {
-          background-color: #ececec;
-          box-shadow: 0 0 0 0.25rem rgba(236, 236, 236, 0.25);
-        }
-
         .dropdown-toggle {
+          display: block;
+          padding: 6px 12px;
+
           &::after {
             content: none;
+          }
+
+          &:hover {
+            background-color: #ececec;
+            box-shadow: 0 0 0 0.25rem rgba(236, 236, 236, 0.25);
           }
 
           img {
@@ -101,10 +109,15 @@ $hover-color:#ffffff;
           padding-left: 5px;
           padding-right: 5px;
 
-          .dropdown-item {
-            margin-left: auto;
-            margin-right: auto;
+          .dropdown-user {
+            padding: 5px 10px;
             text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+          }
+
+          .dropdown-item {
             padding: 5px 40px;
             border-radius: 0.25rem;
             color: white;
@@ -119,6 +132,14 @@ $hover-color:#ffffff;
             &.btn:hover,
             &.btn:active {
               background: #dd1818;
+            }
+
+            i {
+              padding-right: 10px;
+            }
+
+            @media screen and (max-width: 991.98px) {
+              text-align: center;
             }
           }
         }
@@ -241,32 +262,37 @@ ng-scrollbar {
       ul {
         list-style-type: none;
         padding: 0;
+        padding-bottom: 3px;
         margin: 0;
 
-        li a {
-          display: inline-block;
-          width: 100%;
-          font-weight: 500;
-          text-decoration: none;
-          position: relative;
-          padding: 8px 30px 8px 20px;
+        li {
+          padding: 1px 0px;
 
-          .sidebar-item-container {
-            @include sidebar-item-container();
-          }
-
-          i {
-            font-size: 14px;
-            padding-left: 10px;
-            padding-right: 20px;
-            line-height: 30px;
-            text-align: center;
-            border-radius: 5px;
-          }
-
-          &:hover>.sidebar-item-container>i::before {
+          a {
             display: inline-block;
-            animation: swing ease-in-out .7s 1 alternate;
+            width: 100%;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 30px 8px 20px;
+
+            .sidebar-item-container {
+              @include sidebar-item-container();
+            }
+
+            i {
+              font-size: 14px;
+              padding-left: 10px;
+              padding-right: 20px;
+              line-height: 30px;
+              text-align: center;
+              border-radius: 5px;
+            }
+
+            &:hover>.sidebar-item-container>i::before {
+              display: inline-block;
+              animation: swing ease-in-out .7s 1 alternate;
+            }
           }
         }
       }
@@ -300,7 +326,8 @@ ng-scrollbar {
           overflow: hidden;
 
           ul {
-            padding: 5px 0;
+            padding: 0;
+            padding-top: 3px;
           }
 
           li {
@@ -332,17 +359,21 @@ ng-scrollbar {
     color: $color;
   }
 
-  .sidebar-menu ul li:hover>a,
-  .sidebar-menu .sidebar-dropdown>a:not(.toggled) {
+  .sidebar-menu ul li:hover>a:not(.dropdown-link),
+  .sidebar-menu ul li>a.active,
+  .sidebar-submenu ul li:hover>a {
     @include sidebar-item-hover();
     border-radius: 5px;
   }
 
-  ul li:hover a i,
-  .sidebar-dropdown .sidebar-submenu li a:hover:before,
-  .sidebar-menu .sidebar-dropdown a i {
-    @include sidebar-item-hover();
+  .sidebar-menu .sidebar-dropdown>a.dropdown-link {
+    box-shadow: rgba(0, 0, 0, 10%) 0.5px 0.5px 4px, rgba(0, 0, 0, 5%) 2px 2px 4px;
     border-radius: 5px;
+
+    &:hover,
+    &:not(.toggled) {
+      box-shadow: rgba(0, 0, 0, 25%) 0.5px 0.5px 4px, rgba(0, 0, 0, 10%) 2px 2px 4px;
+    }
   }
 
   .sidebar-menu ul li a i,
@@ -352,5 +383,43 @@ ng-scrollbar {
   }
 }
 
+.dashboard-content {
+  padding: 1rem 0.5rem;
 
+  .card {
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 30%);
 
+    &:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 35%);
+      transform: translateY(-2%);
+    }
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1rem 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    color: #101010;
+    font-weight: 700;
+    line-height: 1.4;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .card-subtitle{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+}

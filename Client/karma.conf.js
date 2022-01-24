@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/pecs-lms'),
+      dir: require('path').join(__dirname, './coverage/pecs-client'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 // Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// Services
-import { HttpErrorInterceptorService } from './services/httperror-interceptor.service';
 // External
 import { StickyNavModule } from 'ng2-sticky-nav';
+import { CookieService } from 'ngx-cookie-service';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+// Services
+import { HttpErrorInterceptorService } from './services/httperror-interceptor.service';
 // Components
 import { LandingComponent } from './pages/landing/landing.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -52,6 +53,7 @@ import { CheckLoginGuard } from './guards/check-login.guard';
   ],
   providers: [
     Title,
+    CookieService,
     AuthGuard,
     CheckLoginGuard,
     {

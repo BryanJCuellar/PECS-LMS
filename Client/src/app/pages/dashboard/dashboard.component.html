@@ -5,14 +5,14 @@
       <div class="sidebar-content">
         <ng-scrollbar [autoHeightDisabled]="false" visibility="hover">
           <div class="sidebar-header">
-            <a class="text-center" href="#">
+            <a class="text-center" [routerLink]="['/dashboard']">
               <img src="../../../assets/img/logos/Logo-PECS.webp" alt="">
             </a>
           </div>
           <div class="sidebar-menu">
             <ul>
               <li>
-                <a href="dashboard">
+                <a class="active" [routerLink]="['/dashboard']">
                   <div class="sidebar-item-container">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Tablero</span>
@@ -20,7 +20,7 @@
                 </a>
               </li>
               <li>
-                <a href="dashboard">
+                <a [routerLink]="['/dashboard']">
                   <div class="sidebar-item-container">
                     <i class="far fa-calendar-alt"></i>
                     <span>Calendario</span>
@@ -28,7 +28,7 @@
                 </a>
               </li>
               <li class="sidebar-dropdown">
-                <a (click)="toggleProgramsMenu()" [ngClass]="{'toggled':toggledProgramsMenu}">
+                <a (click)="toggleProgramsMenu()" class="dropdown-link" [ngClass]="{'toggled':toggledProgramsMenu}">
                   <div class="sidebar-item-container">
                     <i class="fas fa-university"></i>
                     <span>Mis Programas</span>
@@ -63,7 +63,7 @@
       </div>
     </nav>
     <!--Page Content-->
-    <main class="page-content">
+    <div class="page-content">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg navbar-light nav-dashboard">
         <div class="container-fluid justify-content-between px-3 px-lg-4">
@@ -82,7 +82,7 @@
             aria-controls="navbarPanel" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse py-3 py-lg-0" id="navbarPanel">
+          <div class="collapse navbar-collapse p-3 p-lg-0" id="navbarPanel">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item text-center mb-3 my-lg-auto">
                 <button class="btn btn-notification">
@@ -92,32 +92,84 @@
               <li class="nav-item text-center dropdown">
                 <a class="btn dropdown-toggle" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false" title="Perfil de usuario">
-                  <span class="text-uppercase fw-bold d-none d-lg-inline-block">{{sessionUser?.nombreUsuario}}</span>
-                  <img class="ms-2" src="../../../assets/img/users/Anonymous.png" alt="Profile-img">
+                  <img src="../../../assets/img/users/user.png" alt="Profile-img">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPanel">
-                  <li class="d-block d-lg-none" style="text-align:center;text-transform:uppercase;color:white;">
-                    {{sessionUser?.nombreUsuario}}
+                  <li class="dropdown-user">
+                    {{sessionUser?.nombre}} {{sessionUser?.apellido}}
                   </li>
-                  <li class="d-block d-lg-none">
-                    <hr class="dropdown-divider text-white">
-                  </li>
-                  <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar Sesión<i
-                        class="fas fa-sign-in-alt ms-2"></i></a></li>
                   <li>
                     <hr class="dropdown-divider text-white">
                   </li>
-                  <li><a class="dropdown-item btn" (click)="logout()">Cerrar Sesión<i
-                        class="fas fa-user-plus ms-2"></i></a></li>
+                  <li>
+                    <a class="dropdown-item" [routerLink]="['/dashboard']">
+                      <i class="fas fa-user"></i>
+                      <span>Perfil</span>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider text-white">
+                  </li>
+                  <li>
+                    <a class="dropdown-item btn" (click)="logout()">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Cerrar Sesión</span>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <div class="py-5"></div>
+      <!--Dashboard content-->
+      <main class="dashboard-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-lg-9">
+              <h1 class="dashboard-content-title fs-3">Tablero</h1>
+              <hr>
+              <div id="courses-segment" class="px-2">
+                <h2 class="fs-4">Cursos Publicados</h2>
+                <hr>
+                <div class="row">
+                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                    <div class="card">
+                      <img src="../../../assets/img/defaults/course-1.png" class="card-img-top img-fluid" alt="...">
+                      <div class="card-body">
+                        <p class="card-subtitle content-text">Categoria Programa</p>
+                        <p class="card-title">Nombre Programa</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                    <div class="card">
+                      <img src="../../../assets/img/defaults/course-2.png" class="card-img-top img-fluid" alt="...">
+                      <div class="card-body">
+                        <p class="card-subtitle content-text">Categoria Programa</p>
+                        <p class="card-title">Nombre Programa</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                    <div class="card">
+                      <img src="../../../assets/img/defaults/course-3.png" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <p class="card-subtitle content-text">Categoria Programa</p>
+                        <p class="card-title">Nombre Programa</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+            </div>
+          </div>
+        </div>
+      </main>
       <app-footer></app-footer>
       <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSidebarState()}"></div>
-    </main>
+    </div>
   </div>
 </div>

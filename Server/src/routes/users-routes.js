@@ -10,11 +10,8 @@ module.exports = (app, pool, passport) => {
     // Habilitar la activacion de la cuenta
     app.get('/users/:idUsuario/:codigoConfirmacion/enableVerifyAccount', usersController.enableVerifyAccount);
 
-    // Preguntar si existe un usuario en sesion
-    app.get('/users/isLoggedIn', authController.isLoggedIn);
-
     // Informacion de usuario en sesion
-    app.get('/users/sessionUser', authController.verifySession, (req, res) => {
+    app.get('/users/sessionUser', authController.isLoggedIn, (req, res) => {
         res.send({
             data: req.user
         });
@@ -22,7 +19,7 @@ module.exports = (app, pool, passport) => {
     });
 
     // Logout usuario
-    app.get('/users/logout', authController.verifySession, authController.logoutUser);
+    app.get('/users/logout', authController.isLoggedIn, authController.logoutUser);
 
     // POST
     // Registrar usuario y enviar email de registro
@@ -48,6 +45,6 @@ module.exports = (app, pool, passport) => {
     // PUT
     // Login usuario y activar cuenta (Actualizar estado = 1)
     app.put('/users/login/verifyAccount', authController.loginUser, 
-    authController.verifySession, usersController.verifyAccount);
+    authController.isLoggedIn, usersController.verifyAccount);
 
 }

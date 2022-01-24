@@ -26,7 +26,7 @@ const ONE_HOUR = 1000 * 60 * 60;
 // Configuracion de sesion
 var sessionStore = new MySQLStore({
     clearExpired: true,
-    checkExpirationInterval: ONE_HOUR,
+    checkExpirationInterval: ONE_HOUR / 4, // 15 minutes
     expiration: 60000, // 1 Minute
     createDatabaseTable: true,
     schema: {
@@ -45,7 +45,7 @@ var sessionOptions = {
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-        maxAge: ONE_HOUR,
+        maxAge: ONE_HOUR * 5, // 30 minutes
         httpOnly: false,
         secure: false
     }

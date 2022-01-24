@@ -20,12 +20,12 @@ const scrollOptions: ExtraOptions = {
 };
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, data: { title: 'PECS | LMS' } },
-  { path: 'login', component: LoginComponent, data: { title: 'PECS LMS - Iniciar sesión' } },
-  { path: 'login/:idUsuario/:codigo', component: LoginComponent, data: { title: 'Activación de Cuenta' } },
-  { path: 'signup', component: SignupComponent, data: { title: 'PECS LMS - Registro' } },
-  { path: 'signup/:idUsuario/:codigo', component: SignupComponent, data: { title: 'Registro exitoso' } },
-  { path: 'dashboard', component: DashboardComponent, data: { title: 'Tablero' } },
+  { path: '', component: LandingComponent, data: { title: 'PECS | LMS' }, canActivate: [CheckLoginGuard] },
+  { path: 'login', component: LoginComponent, data: { title: 'PECS LMS - Iniciar sesión' }, canActivate: [CheckLoginGuard] },
+  { path: 'login/:idUsuario/:codigo', component: LoginComponent, data: { title: 'Activación de Cuenta' }, canActivate: [CheckLoginGuard] },
+  { path: 'signup', component: SignupComponent, data: { title: 'PECS LMS - Registro' }, canActivate: [CheckLoginGuard] },
+  { path: 'signup/:idUsuario/:codigo', component: SignupComponent, data: { title: 'Registro exitoso' }, canActivate: [CheckLoginGuard] },
+  { path: 'dashboard', component: DashboardComponent, data: { title: 'Tablero' }, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent, data: { title: '404 Not Found' } },
   { path: '503', component: ServerErrorComponent, data: { title: '503 Service Unavailable' } },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
