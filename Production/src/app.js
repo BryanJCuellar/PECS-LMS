@@ -6,7 +6,7 @@ const pool = require('./database/connection');
 // Gestion de las sesiones
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-// Para ver el log de los requests que recibe el servidor
+// Para ver el log de los requests que recibe el servidor (Solo en desarrollo)
 const morgan = require('morgan');
 // Modulo cors para prevenir problemas de dominios cruzados
 const cors = require('cors');

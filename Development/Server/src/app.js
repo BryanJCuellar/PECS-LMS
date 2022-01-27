@@ -6,17 +6,10 @@ const pool = require('./database/connection');
 // Gestion de las sesiones
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-// Core Modules
-const path = require('path');
-// Para ver el log de los requests que recibe el servidor
+// Para ver el log de los requests que recibe el servidor (Solo en desarrollo)
 const morgan = require('morgan');
 // Modulo cors para prevenir problemas de dominios cruzados
 const cors = require('cors');
-// Para cargar variables de entorno del archivo .env
-const dotenv = require('dotenv');
-dotenv.config({
-    path: path.join(__dirname, '..', '.env')
-});
 // Para autenticar peticiones
 const passport = require('passport');
 // Configuracion de passport
@@ -52,15 +45,19 @@ var sessionOptions = {
 };
 // Si el entorno es de produccion
 if (app.get('env') === 'production') {
-    // app.set('trust proxy', 1) // trust first proxy
+    app.set('trust proxy', 1) // trust first proxy
     sessionOptions.cookie.secure = true // serve secure cookies
+} else {
+    // Para cargar variables de entorno del archivo .env (solo en desarrollo)
+    require('dotenv').config();
 }
 
 /***Middlewares***/
 app.use(morgan('dev'));
 app.use(cors({
     origin: "http://localhost:4200", // Cambiar ruta ya puesto en produccion
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 app.use(express.json());
 app.use(express.urlencoded({
