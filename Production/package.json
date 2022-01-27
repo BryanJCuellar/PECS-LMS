@@ -1,5 +1,5 @@
 {
-  "name": "server-pecs",
+  "name": "pecs-server",
   "version": "1.0.0",
   "description": "Servidor de Proyecto PECS LMS",
   "main": "index.js",
