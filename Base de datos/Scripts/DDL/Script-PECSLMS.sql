@@ -20,7 +20,7 @@ USE `pecs_lms` ;
 -- Table `pecs_lms`.`CategoriaUsuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`CategoriaUsuario` (
-  `idCategoriaUsuario` INT UNSIGNED NOT NULL,
+  `idCategoriaUsuario` INT UNSIGNED NOT NULL COMMENT 'id de categoria del usuario',
   `descripcion` VARCHAR(45) NOT NULL COMMENT 'Categorias de usuario (Administrador, Docente, Estudiante)',
   PRIMARY KEY (`idCategoriaUsuario`))
 ENGINE = InnoDB;
@@ -30,13 +30,13 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Usuario` (
-  `idUsuario` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido` VARCHAR(45) NOT NULL,
-  `nombreUsuario` VARCHAR(30) NOT NULL,
-  `clave` VARCHAR(90) NOT NULL,
-  `urlImagenPerfil` VARCHAR(3000) NULL,
-  `descripcionPerfil` TEXT NULL,
+  `idUsuario` BIGINT UNSIGNED NOT NULL COMMENT 'id del usuario',
+  `nombre` VARCHAR(45) NOT NULL COMMENT 'nombre del usuario',
+  `apellido` VARCHAR(45) NOT NULL COMMENT 'apellido del usuario',
+  `nombreUsuario` VARCHAR(30) NOT NULL COMMENT 'nombre de usuario que tendra cada usuario',
+  `clave` VARCHAR(90) NOT NULL COMMENT 'contraseña',
+  `urlImagenPerfil` VARCHAR(3000) NULL COMMENT 'imagen de perfil',
+  `descripcionPerfil` TEXT NULL COMMENT 'descripcion del perfil',
   `pais` VARCHAR(100) NULL,
   `zonaHoraria` VARCHAR(100) NULL,
   `idioma` VARCHAR(100) NULL,
@@ -59,8 +59,8 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Correo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Correo` (
-  `idCorreo` BIGINT UNSIGNED NOT NULL,
-  `descripcion` VARCHAR(200) NOT NULL,
+  `idCorreo` BIGINT UNSIGNED NOT NULL COMMENT 'id del correo',
+  `descripcion` VARCHAR(200) NOT NULL COMMENT 'descripcion del correo',
   `correoSesion` TINYINT NOT NULL COMMENT 'Validar si es correo con el que se inicia sesion',
   `idUsuario` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idCorreo`),
@@ -78,7 +78,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Telefono` (
   `idTelefono` BIGINT UNSIGNED NOT NULL,
-  `numeroTelefono` VARCHAR(45) NOT NULL,
+  `numeroTelefono` VARCHAR(45) NOT NULL COMMENT 'numero de telefono',
   `idUsuario` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idTelefono`),
   INDEX `fk_Telefono_Usuario1_idx` (`idUsuario` ASC),
@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`CategoriaPrograma` (
   `idCategoriaPrograma` INT UNSIGNED NOT NULL,
   `codigoTipoPrograma` VARCHAR(20) NULL,
   `descripcion` VARCHAR(90) NOT NULL COMMENT 'Categorias de programas (Diplomados, Cursos, Talleres)',
+  `fechaCreacion` DATETIME NULL COMMENT 'fecha de creacion del programa',
   `estado` TINYINT NOT NULL COMMENT 'Disponibilidad de la categoria',
   PRIMARY KEY (`idCategoriaPrograma`))
 ENGINE = InnoDB;
@@ -135,8 +136,8 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`GrupoTrabajo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`GrupoTrabajo` (
-  `idGrupoTrabajo` BIGINT UNSIGNED NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
+  `idGrupoTrabajo` BIGINT UNSIGNED NOT NULL COMMENT 'id del grupo de trabajo',
+  `descripcion` VARCHAR(45) NOT NULL COMMENT 'descripcion del grupo de trabajo.',
   `idSeccionPrograma` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idGrupoTrabajo`),
   INDEX `fk_GrupoTrabajo_SeccionPrograma1_idx` (`idSeccionPrograma` ASC),
@@ -153,9 +154,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Inscripcion` (
   `idInscripcion` BIGINT UNSIGNED NOT NULL,
-  `fechaInscripcion` DATE NULL,
+  `fechaInscripcion` DATE NULL COMMENT 'fecha en la que se inscribio al programa',
   `nota` FLOAT NULL,
-  `rolUsuario` VARCHAR(45) NOT NULL,
+  `rolUsuario` VARCHAR(45) NOT NULL COMMENT 'Instructor/ Estudiante',
   `idUsuario` BIGINT UNSIGNED NOT NULL,
   `idSeccionPrograma` BIGINT UNSIGNED NOT NULL,
   `idGrupoTrabajo` BIGINT UNSIGNED NULL,
@@ -185,8 +186,8 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Modulo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Modulo` (
-  `idModulo` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
+  `idModulo` BIGINT UNSIGNED NOT NULL COMMENT 'id del modulo',
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre del modulo',
   `principal` TINYINT NULL COMMENT 'Modulo Principal de la Seccion',
   `bloqueo` DATETIME NULL COMMENT 'Modulo bloqueado hasta fecha mencionada (Bloqueado es visible pero no tiene funcionalidad sus items)',
   `estado` TINYINT NOT NULL COMMENT 'Disponibilidad del modulo',
@@ -206,9 +207,9 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Pagina`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Pagina` (
-  `idPagina` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `contenido` LONGTEXT NULL,
+  `idPagina` BIGINT UNSIGNED NOT NULL COMMENT 'id de la pagina',
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre de la pagina',
+  `contenido` LONGTEXT NULL COMMENT 'contenido que tendra la pagina: archivos, imagenes, videos, etc.',
   `visibilidad` TINYINT NULL COMMENT 'Visibilidad en el apartado de modulo',
   `paginaInicio` TINYINT NULL COMMENT 'Establecer como pagina de inicio',
   `estado` TINYINT NOT NULL,
@@ -229,8 +230,8 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`TextoEncabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`TextoEncabezado` (
-  `idTextoEncabezado` BIGINT UNSIGNED NOT NULL,
-  `contenido` TEXT NOT NULL,
+  `idTextoEncabezado` BIGINT UNSIGNED NOT NULL COMMENT 'id del texto de encabezado',
+  `contenido` TEXT NOT NULL COMMENT 'contenido del texto de encabezado',
   `estado` TINYINT NOT NULL COMMENT 'Disponibilidad del texto',
   `posicionModulo` INT NULL COMMENT 'Posicion de item en el Modulo',
   `idModulo` BIGINT UNSIGNED NOT NULL,
@@ -271,7 +272,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Diploma` (
   `idDiploma` BIGINT UNSIGNED NOT NULL,
   `programaDiploma` VARCHAR(100) NULL COMMENT 'Nombre del programa del que recibio el diploma',
-  `urlDiploma` VARCHAR(3000) NULL,
+  `urlDiploma` VARCHAR(3000) NULL COMMENT 'enlace del diploma',
   `idUsuario` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idDiploma`),
   INDEX `fk_Diploma_Usuario1_idx` (`idUsuario` ASC),
@@ -309,9 +310,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Archivo` (
   `idArchivo` BIGINT UNSIGNED NOT NULL,
-  `nombreArchivo` VARCHAR(255) NULL,
-  `urlArchivo` VARCHAR(3000) NULL,
-  `tamanio` VARCHAR(45) NULL,
+  `nombreArchivo` VARCHAR(255) NULL COMMENT 'nombre del archivo',
+  `urlArchivo` VARCHAR(3000) NULL COMMENT 'enlace del archivo',
+  `tamanio` VARCHAR(45) NULL COMMENT 'tamaño del archivo',
   `idItemArchivo` BIGINT UNSIGNED NULL,
   `idSeccionPrograma` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idArchivo`),
@@ -334,18 +335,18 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Tarea`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Tarea` (
-  `idTarea` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `descripcion` LONGTEXT NULL,
-  `calificado` TINYINT NULL,
-  `puntaje` FLOAT NULL,
-  `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
-  `grupal` TINYINT NULL,
+  `idTarea` BIGINT UNSIGNED NOT NULL COMMENT 'id de la tarea',
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre de la tarea',
+  `descripcion` LONGTEXT NULL COMMENT 'descripcion de la tarea',
+  `calificado` TINYINT NULL COMMENT 'sera calificada o no.',
+  `puntaje` FLOAT NULL COMMENT 'puntaje que tendra la tarea',
+  `fechaDisponibleInicial` DATETIME NULL COMMENT 'fecha de inicio que estara disponible',
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha final que estara disponible',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega',
+  `grupal` TINYINT NULL COMMENT 'si es grupal o no',
   `posicionModulo` INT NULL,
   `posicionSeccionTareas` INT NULL,
-  `estado` TINYINT NOT NULL,
+  `estado` TINYINT NOT NULL COMMENT 'entregada/ no entregada',
   `todos` TINYINT NULL,
   `idModulo` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idTarea`),
@@ -400,8 +401,8 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`AsignacionTarea` (
   `idTarea` BIGINT UNSIGNED NOT NULL,
   `idInscripcionEstudiante` BIGINT UNSIGNED NOT NULL,
   `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha entre la cual estara disponible ',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega',
   PRIMARY KEY (`idTarea`, `idInscripcionEstudiante`),
   INDEX `fk_Tarea_has_Inscripcion_Inscripcion1_idx` (`idInscripcionEstudiante` ASC),
   INDEX `fk_Tarea_has_Inscripcion_Tarea1_idx` (`idTarea` ASC),
@@ -425,8 +426,8 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`AsignacionTareaGrupal` (
   `idTarea` BIGINT UNSIGNED NOT NULL,
   `idGrupoTrabajo` BIGINT UNSIGNED NOT NULL,
   `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha en la cual estara disponible',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega',
   PRIMARY KEY (`idTarea`, `idGrupoTrabajo`),
   INDEX `fk_GrupoTrabajo_has_Tarea_Tarea1_idx` (`idTarea` ASC),
   INDEX `fk_GrupoTrabajo_has_Tarea_GrupoTrabajo1_idx` (`idGrupoTrabajo` ASC),
@@ -447,18 +448,18 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Foro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Foro` (
-  `idForo` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `descripcion` LONGTEXT NULL,
-  `calificado` TINYINT NULL,
-  `puntaje` FLOAT NULL,
-  `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
-  `grupal` TINYINT NULL,
+  `idForo` BIGINT UNSIGNED NOT NULL COMMENT 'id del foro',
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre del foro',
+  `descripcion` LONGTEXT NULL COMMENT 'descripcion del foro',
+  `calificado` TINYINT NULL COMMENT 'si ya fue calificado o no ',
+  `puntaje` FLOAT NULL COMMENT 'puntaje que tendra el foro',
+  `fechaDisponibleInicial` DATETIME NULL COMMENT 'fecha en que visualizara el foro',
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha hasta la que se podra ver el foro',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima que se podra entregar el foro ',
+  `grupal` TINYINT NULL COMMENT 'si el foro es grupal o no',
   `posicionModulo` INT NULL,
   `posicionSeccionForos` INT NULL,
-  `estado` TINYINT NOT NULL,
+  `estado` TINYINT NOT NULL COMMENT 'entregado/no entregado',
   `todos` TINYINT NULL,
   `idModulo` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idForo`),
@@ -478,8 +479,8 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`AsignacionForo` (
   `idForo` BIGINT UNSIGNED NOT NULL,
   `idInscripcionEstudiante` BIGINT UNSIGNED NOT NULL,
   `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha entre la cual estara disponible ',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega ',
   PRIMARY KEY (`idForo`, `idInscripcionEstudiante`),
   INDEX `fk_Foro_has_Inscripcion_Inscripcion1_idx` (`idInscripcionEstudiante` ASC),
   INDEX `fk_Foro_has_Inscripcion_Foro1_idx` (`idForo` ASC),
@@ -503,8 +504,8 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`AsignacionForoGrupal` (
   `idForo` BIGINT UNSIGNED NOT NULL,
   `idGrupoTrabajo` BIGINT UNSIGNED NOT NULL,
   `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha entre la cual estara disponible ',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega',
   PRIMARY KEY (`idForo`, `idGrupoTrabajo`),
   INDEX `fk_Foro_has_GrupoTrabajo_GrupoTrabajo1_idx` (`idGrupoTrabajo` ASC),
   INDEX `fk_Foro_has_GrupoTrabajo_Foro1_idx` (`idForo` ASC),
@@ -526,7 +527,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`TemaDiscusion` (
   `idTemaDiscusion` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(200) NOT NULL,
+  `nombre` VARCHAR(200) NOT NULL COMMENT 'nombre del tema de discucion ',
   `idForo` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idTemaDiscusion`),
   INDEX `fk_TemaDiscusion_Foro1_idx` (`idForo` ASC),
@@ -575,10 +576,10 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`RespuestaEntradaForo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`RespuestaEntradaForo` (
-  `idRespuestaEntradaForo` BIGINT UNSIGNED NOT NULL,
-  `comentario` TEXT NOT NULL,
-  `fechaPublicacion` DATETIME NULL,
-  `fechaUltimaModificacion` DATETIME NULL,
+  `idRespuestaEntradaForo` BIGINT UNSIGNED NOT NULL COMMENT 'id de la respuesta da la entrada al foro',
+  `comentario` TEXT NOT NULL COMMENT 'comentario de la entrada al modulo',
+  `fechaPublicacion` DATETIME NULL COMMENT 'fecha que se publico la entrada al modulo',
+  `fechaUltimaModificacion` DATETIME NULL COMMENT 'fecha en la que se modifico la entrada al modulo',
   `idInscripcion` BIGINT UNSIGNED NOT NULL,
   `idEntradaForo` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idRespuestaEntradaForo`),
@@ -602,10 +603,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Evaluacion` (
   `idEvaluacion` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `descripcion` LONGTEXT NULL,
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre de la evaluacion ',
+  `descripcion` LONGTEXT NULL COMMENT 'descripcion de la evaluacion',
   `calificado` TINYINT NULL COMMENT 'Si la evaluacion tiene puntaje o no',
-  `puntaje` FLOAT NULL,
+  `puntaje` FLOAT NULL COMMENT 'puntaje de la evaluacion',
   `preguntasRandom` TINYINT NULL COMMENT 'Mezclar aleatoriamente las preguntas',
   `respuestasRandom` TINYINT NULL COMMENT 'Mezclar aleatoriamente las respuestas',
   `multiplesIntentos` TINYINT NULL COMMENT 'Habilitar multiples intentos',
@@ -645,8 +646,8 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`AsignacionEvaluacion` (
   `idEvaluacion` BIGINT UNSIGNED NOT NULL,
   `idInscripcionEstudiante` BIGINT UNSIGNED NOT NULL,
   `fechaDisponibleInicial` DATETIME NULL,
-  `fechaDisponibleFinal` DATETIME NULL,
-  `fechaEntrega` DATETIME NULL,
+  `fechaDisponibleFinal` DATETIME NULL COMMENT 'fecha entre la cual estara disponible.',
+  `fechaEntrega` DATETIME NULL COMMENT 'fecha maxima de entrega',
   PRIMARY KEY (`idEvaluacion`, `idInscripcionEstudiante`),
   INDEX `fk_Evaluacion_has_Inscripcion_Inscripcion1_idx` (`idInscripcionEstudiante` ASC),
   INDEX `fk_Evaluacion_has_Inscripcion_Evaluacion1_idx` (`idEvaluacion` ASC),
@@ -668,7 +669,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`CategoriaPregunta` (
   `idCategoriaPregunta` INT UNSIGNED NOT NULL,
-  `descripcion` VARCHAR(200) NOT NULL,
+  `descripcion` VARCHAR(200) NOT NULL COMMENT 'descripcion de la categoria de la pregunta.',
   PRIMARY KEY (`idCategoriaPregunta`))
 ENGINE = InnoDB;
 
@@ -677,15 +678,15 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Pregunta`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Pregunta` (
-  `idPregunta` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NULL,
-  `descripcion` TEXT NULL,
+  `idPregunta` BIGINT UNSIGNED NOT NULL COMMENT 'id de la pregunta',
+  `nombre` VARCHAR(100) NULL COMMENT 'nombre de la pregunta',
+  `descripcion` TEXT NULL COMMENT 'descripcion de la pregunta',
   `respuestasPosibles` TEXT NULL COMMENT 'Respuestas posibles para espacios en blanco',
   `respuestasCoincidencias` TEXT NULL COMMENT 'Respuestas para listas desplegables de coincidencias',
   `respuestaExacta` DOUBLE NULL COMMENT 'Para respuesta numerica, guardar respuesta exacta',
   `rangoMinimo` DOUBLE NULL COMMENT 'Para respuesta numerica con rango, especificar rango minimo ',
   `rangoMaximo` DOUBLE NULL COMMENT 'Para respuesta numerica con rango, especificar rango maximo',
-  `puntaje` FLOAT NULL,
+  `puntaje` FLOAT NULL COMMENT 'puntaje que tendra la pregunta',
   `respuestaFeedback` TEXT NULL COMMENT 'Comentario de retroalimentacion de respuestas correctas de la pregunta',
   `posicion` INT NULL,
   `idCategoriaPregunta` INT UNSIGNED NOT NULL,
@@ -711,7 +712,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`OpcionPregunta` (
   `idOpcionPregunta` BIGINT UNSIGNED NOT NULL,
-  `descripcion` TEXT NULL,
+  `descripcion` TEXT NULL COMMENT 'descripcion de las opciones de las preguntas ',
   `respuestaCorrectaCoincidencia` TEXT NULL,
   `puntajeOpcion` FLOAT NULL COMMENT 'Ponderacion de respuesta',
   `correcta` TINYINT NULL COMMENT 'Especificar si la opcion es una respuesta correcta o no',
@@ -731,10 +732,10 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`Anuncio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`Anuncio` (
-  `idAnuncio` BIGINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
+  `idAnuncio` BIGINT UNSIGNED NOT NULL COMMENT 'id del anuncio',
+  `nombre` VARCHAR(100) NOT NULL COMMENT 'nombre del anuncio',
   `contenido` LONGTEXT NULL,
-  `fechaPublicacion` DATETIME NULL,
+  `fechaPublicacion` DATETIME NULL COMMENT 'fecha que se publico el anuncio',
   `posicionSeccionAnuncios` INT NULL,
   `idInscripcionDocente` BIGINT UNSIGNED NOT NULL COMMENT 'Docente que publica el anuncio',
   `idSeccionPrograma` BIGINT UNSIGNED NOT NULL,
@@ -792,9 +793,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`EntradaAnuncio` (
   `idEntradaAnuncio` BIGINT UNSIGNED NOT NULL,
-  `comentario` TEXT NOT NULL,
-  `fechaPublicacion` DATETIME NULL,
-  `fechaUltimaModificacion` DATETIME NULL,
+  `comentario` TEXT NOT NULL COMMENT 'comentario del anuncio',
+  `fechaPublicacion` DATETIME NULL COMMENT 'fecha que se publico el anuncio',
+  `fechaUltimaModificacion` DATETIME NULL COMMENT 'ultima fecha que se publico el anuncio',
   `idInscripcion` BIGINT UNSIGNED NOT NULL COMMENT 'Participante que publica el comentario',
   `idAnuncio` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idEntradaAnuncio`),
@@ -818,9 +819,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`RespuestaEntradaAnuncio` (
   `idRespuestaEntradaAnuncio` INT UNSIGNED NOT NULL,
-  `comentario` TEXT NOT NULL,
-  `fechaPublicacion` DATETIME NULL,
-  `fechaUltimaModificacion` DATETIME NULL,
+  `comentario` TEXT NOT NULL COMMENT 'comentario del anuncio',
+  `fechaPublicacion` DATETIME NULL COMMENT 'fecha que se publico el anuncio',
+  `fechaUltimaModificacion` DATETIME NULL COMMENT 'ultima modificacion del anuncio',
   `idInscripcion` BIGINT UNSIGNED NOT NULL,
   `idEntradaAnuncio` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idRespuestaEntradaAnuncio`),
@@ -866,10 +867,10 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`CalificacionAsignacion` (
   `idForo` BIGINT UNSIGNED NULL,
   `idInscripcionEstudiante` BIGINT UNSIGNED NULL,
   `idInscripcionDocente` BIGINT UNSIGNED NULL,
-  `nota` FLOAT NULL,
-  `fechaCalificacion` DATETIME NULL,
-  `estadoCalificacion` VARCHAR(45) NULL,
-  `comentario` VARCHAR(5000) NULL,
+  `nota` FLOAT NULL COMMENT 'nota obtenida',
+  `fechaCalificacion` DATETIME NULL COMMENT 'fecha en la cual se realizo la calificacion',
+  `estadoCalificacion` VARCHAR(45) NULL COMMENT 'calificada/no calificada',
+  `comentario` VARCHAR(5000) NULL COMMENT 'comentario sobre la calificacion ',
   PRIMARY KEY (`idCalificacionAsignacion`),
   INDEX `fk_CalificacionAsignacion_Tarea1_idx` (`idTarea` ASC),
   INDEX `fk_CalificacionAsignacion_Inscripcion1_idx` (`idInscripcionEstudiante` ASC),
@@ -905,11 +906,11 @@ CREATE TABLE IF NOT EXISTS `pecs_lms`.`IntentoEvaluacion` (
   `idIntentoEvaluacion` BIGINT UNSIGNED NOT NULL,
   `idInscripcionEstudiante` BIGINT UNSIGNED NOT NULL,
   `idEvaluacion` BIGINT UNSIGNED NOT NULL,
-  `nota` FLOAT NULL,
+  `nota` FLOAT NULL COMMENT 'nota en el intento de evaluacion',
   `fechaIntento` DATETIME NULL COMMENT 'Fecha y hora en la que termino el intento',
-  `duracionIntento` INT NULL,
+  `duracionIntento` INT NULL COMMENT 'tiempo que duro el intento',
   `estadoEvaluacion` VARCHAR(45) NULL,
-  `comentario` VARCHAR(5000) NULL,
+  `comentario` VARCHAR(5000) NULL COMMENT 'comentario del intento de evaluacion.',
   PRIMARY KEY (`idIntentoEvaluacion`),
   INDEX `fk_IntentoEvaluacion_Evaluacion1_idx` (`idEvaluacion` ASC),
   INDEX `fk_IntentoEvaluacion_Inscripcion1_idx` (`idInscripcionEstudiante` ASC),
@@ -931,8 +932,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`PreguntasGuardadas` (
   `idIntentoEvaluacion` BIGINT UNSIGNED NOT NULL,
-  `idPregunta` BIGINT UNSIGNED NOT NULL,
-  `idOpcionPregunta` BIGINT UNSIGNED NOT NULL,
+  `idPregunta` BIGINT UNSIGNED NOT NULL COMMENT 'id de la pregunta',
+  `idOpcionPregunta` BIGINT UNSIGNED NOT NULL COMMENT 'id de la opcion de la pregunta ',
   `respuestaCoincidencia` TEXT NULL,
   INDEX `fk_IntentoEvaluacion_has_Pregunta_Pregunta1_idx` (`idPregunta` ASC),
   INDEX `fk_IntentoEvaluacion_has_Pregunta_IntentoEvaluacion1_idx` (`idIntentoEvaluacion` ASC),
@@ -960,10 +961,10 @@ ENGINE = InnoDB;
 -- Table `pecs_lms`.`PreguntasDesarrolloGuardadas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pecs_lms`.`PreguntasDesarrolloGuardadas` (
-  `idIntentoEvaluacion` BIGINT UNSIGNED NOT NULL,
-  `idPregunta` BIGINT UNSIGNED NOT NULL,
-  `entradaTexto` TEXT NULL,
-  `puntajeObtenido` INT NULL,
+  `idIntentoEvaluacion` BIGINT UNSIGNED NOT NULL COMMENT 'id del intento',
+  `idPregunta` BIGINT UNSIGNED NOT NULL COMMENT 'id de la pregunta',
+  `entradaTexto` TEXT NULL COMMENT 'texto de la pregunta',
+  `puntajeObtenido` INT NULL COMMENT 'puntaje obtenido en la pregunta',
   PRIMARY KEY (`idIntentoEvaluacion`, `idPregunta`),
   INDEX `fk_IntentoEvaluacion_has_Pregunta_Pregunta2_idx` (`idPregunta` ASC),
   INDEX `fk_IntentoEvaluacion_has_Pregunta_IntentoEvaluacion2_idx` (`idIntentoEvaluacion` ASC),
