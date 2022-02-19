@@ -3,18 +3,17 @@ const dataIntoJSON = require('../functions/dataIntoJSON');
 
 function testConnectionController(pool) {
     let controllerMethods = {};
-
+    // Probar conexion con la base
     controllerMethods.connect = async (req, res) => {
         await pool.query('SELECT 1 + 1 AS solution', (err, result) => {
             if (err) {
-                res.status(500).send({
-                    message: err
+                return res.status(500).send({
+                    errorMessage: err
                 });
-                return;
             }
-            resultData = dataIntoJSON(result);
+            resultData = dataIntoJSON(result[0]);
             res.send({
-                data: resultData[0],
+                data: resultData,
                 message: 'consulta exitosa'
             });
             res.end();

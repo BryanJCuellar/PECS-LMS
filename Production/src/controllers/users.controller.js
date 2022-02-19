@@ -1,5 +1,5 @@
-// Produccion en Heroku
-const frontendHost = 'https://pecsfcmunah.herokuapp.com';
+// Cambiar ruta ya puesto en produccion
+const frontendHost = 'http://localhost:8888';
 // Functions
 const currentDateTime = require('../functions/currentDateTime');
 const dataIntoJSON = require('../functions/dataIntoJSON');
@@ -82,8 +82,8 @@ function usersController(pool) {
             port: 465,
             secure: true,
             auth: {
-                user: 'pecslmsunah@gmail.com',
-                pass: 'hrI5w9Vc8yBj'
+                user: process.env.AUTH_USER,
+                pass: process.env.AUTH_PASS
             }
         });
         readHTMLFile(path.join(__dirname, '..', 'views', 'verify-account.html'), (err, html) => {
@@ -100,7 +100,7 @@ function usersController(pool) {
             let htmlToSend = template(replacements);
             // Configuracion para el envio del email
             let mailOptions = {
-                from: 'pecslmsunah@gmail.com',
+                from: process.env.AUTH_USER,
                 to: req.body.correo,
                 subject: "Bienvenido a PECS LMS",
                 attachments: [{
@@ -260,7 +260,6 @@ function usersController(pool) {
                     errorMessage: err
                 });
             }
-            console.log(result);
             res.status(200).send({
                 message: 'Cuenta activada exitosamente'
             });

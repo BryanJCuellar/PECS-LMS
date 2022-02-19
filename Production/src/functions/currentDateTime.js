@@ -1,3 +1,4 @@
+// Current Date in MySQL Format
 exports.getCurrentDate = function (datepart) {
     let result_date, date, day, month, year;
     date = new Date();
@@ -20,7 +21,7 @@ exports.getCurrentDate = function (datepart) {
     }
     return result_date;
 };
-
+// Current DateTime in MySQL Format
 exports.getCurrentDateTime = function () {
     let current_datetime, date, day, month, year, hours, minutes, seconds;
     date = new Date();

@@ -1,7 +1,7 @@
 {
   "name": "pecs-server",
   "version": "1.0.0",
-  "description": "Servidor de Proyecto PECS LMS",
+  "description": "Servidor de PECS LMS",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",

@@ -1,9 +1,11 @@
+// Valores para conexion a la BD (Cambiar en produccion)
 module.exports = {
     database: {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME,
-        multipleStatements: true
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'pecs_lms',
+        port: 3306,
+        multipleStatements: true // Para procedimientos almacenados con parametros de salida
     }
 }

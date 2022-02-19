@@ -2,6 +2,7 @@ function authController(passport) {
     let controllerMethods = {};
     // Login Usuario
     controllerMethods.loginUser = (req, res, next) => {
+        // Autenticar con passport y passport-local
         passport.authenticate('local-login', (err, usuario, info) => {
             if (err) {
                 return res.status(500).send({
@@ -10,6 +11,9 @@ function authController(passport) {
             }
             if (!usuario) {
                 // No se encontro usuario con los datos enviados
+                /*Nota: el parametro info contiene la informacion del parametro done de la funcion 
+                local login en el archivo passport.js, pero aqui decidimos usar un mensaje de forma 
+                general*/
                 return res.status(400).send('Usuario/Correo u Contraseña no válidos');
             }
             // Si datos son validos, intentar iniciar sesion
@@ -35,6 +39,7 @@ function authController(passport) {
                     errorMessage: err
                 });
             }
+            // Retornar mensaje eliminando cookie del navegador
             return res.status(200).clearCookie('connect.sid', {
                 path: '/'
             }).send({

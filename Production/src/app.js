@@ -10,18 +10,23 @@ const MySQLStore = require('express-mysql-session')(session);
 const morgan = require('morgan');
 // Modulo cors para prevenir problemas de dominios cruzados
 const cors = require('cors');
-// Para autenticar peticiones
+// Si el entorno es de desarrollo
+if (app.get('env') === 'development') {
+    // Modulo dotenv para cargar variables de entorno del archivo .env (solo en desarrollo)
+    require('dotenv').config();
+}
+// Modulo passport para autenticar usuarios
 const passport = require('passport');
 // Configuracion de passport
 require('./config/passport')(pool, passport);
 // Hora en milisegundos
 const ONE_HOUR = 1000 * 60 * 60;
-// Configuracion de sesion
+// Configuracion de sesion en MySQLStore
 var sessionStore = new MySQLStore({
-    clearExpired: true,
-    checkExpirationInterval: ONE_HOUR / 4, // 15 minutes
-    expiration: 60000, // 1 Minute
-    createDatabaseTable: true,
+    clearExpired: true, // Limpiar las sesiones expiradas de la base
+    checkExpirationInterval: ONE_HOUR / 4, // Revisar expiracion cada 15 minutos
+    expiration: 60000, // 1 minuto de expiracion (Esto ocurre una vez que cookie.maxAge ha expirado)
+    createDatabaseTable: true, // Crear una tabla de sesiones en caso de no existir
     schema: {
         tableName: 'Sessions',
         columnNames: {
@@ -31,32 +36,29 @@ var sessionStore = new MySQLStore({
         }
     }
 }, pool);
+// Configuracion de sesion con express-session
 var sessionOptions = {
-    secret: ['ZShVeQceVMulgGVOhiC8xVberKyeRx','kN0kDMbGXUWUaWOEDBtkBUXzIqZO36','hl0DAMBnIPRFAhX3IbadHiOs9S8GYb'],
-    resave: true,
-    rolling: true,
-    saveUninitialized: false,
-    store: sessionStore,
+    secret: process.env.SESSION_SECRET, // Secreto para el cookie del session ID
+    resave: true, // Guarda o actualiza la sesion en store, aun cuando esta no ha sido modificada durante una peticion
+    rolling: true, // Reestablece la cuenta regresiva de la expiracion de maxAge durante una peticion
+    saveUninitialized: false, // Guarda sesiones no inicializadas en store, lo declaramos false para solo guardar sesiones con login
+    store: sessionStore, // Session store con MySQL
     cookie: {
-        maxAge: ONE_HOUR / 2, // 30 minutes
+        maxAge: ONE_HOUR / 2, // Duracion de cookie - 30 minutos de inactividad
         httpOnly: false,
         secure: false
     }
 };
-
 // Si el entorno es de produccion
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     sessionOptions.cookie.secure = true // serve secure cookies
-} else {
-    // Para cargar variables de entorno del archivo .env (solo en desarrollo)
-    require('dotenv').config();
 }
 
 /***Middlewares***/
 app.use(morgan('dev'));
 app.use(cors({
-    origin: 'https://pecsfcmunah.herokuapp.com',
+    origin: 'http://localhost:8888', // Cambiar ruta ya puesto en produccion
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
@@ -68,7 +70,7 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Archivos cliente generados con el comando npm run build en Angular
+// Client Files
 app.use('/', express.static('src/pecs-client'));
 
 // Probar conexion cuando ocurre error 503
