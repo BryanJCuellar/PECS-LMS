@@ -1,0 +1,96 @@
+/*Mixins SCSS*/
+/*Keyframes*/
+@mixin keyframes($animationName) {
+
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+
+  @keyframes #{$animationName} {
+    @content;
+  }
+
+}
+
+/*Keyframe Animation*/
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+/*Enlaces*/
+@mixin link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/*Buttons*/
+@mixin button($fontSize, $padding) {
+  color: white;
+  font-size: $fontSize;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  padding: $padding;
+  border: 0px solid white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/*No seleccionar texto con cursor*/
+@mixin unselectableText {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*Text Gradient*/
+@mixin textGradient($color1, $color2) {
+  background: $color1;
+  background: -webkit-linear-gradient($color1, $color2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/*Background Gradient*/
+@mixin backgroundGradient($position, $color1, $color2, $color3){
+  background: $color1;
+  background: -webkit-linear-gradient(to $position, $color2, $color1, $color3);
+  background: linear-gradient(to $position, $color2, $color1, $color3);
+}
+
+/*Paragraph Styles*/
+@mixin paragraph($fontSize, $fontSizeResponsive, $responsiveWidth) {
+  font-size: $fontSize;
+
+  @media (max-width: $responsiveWidth) {
+    font-size: $fontSizeResponsive;
+  }
+}
+
+/**/

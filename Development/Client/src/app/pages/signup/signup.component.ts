@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   // Validar email, username
   emailDuplicado: boolean = false;
   usernameDuplicado: boolean = false;
-  // Variable para debounce en email y username
+  // Variable para debounce en email y username, Source: https://youtu.be/mt0pMPwgHhc
   debounceTimer?: NodeJS.Timeout;
   // Para recopilar datos del usuario una vez registrado
   dataUsuario: any = null;
@@ -81,7 +81,7 @@ export class SignupComponent implements OnInit {
       idCategoriaUsuario: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(45)]],
       apellido: ['', [Validators.required, Validators.maxLength(45)]],
-      numeroTelefono: ['', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$")]],
+      numeroTelefono: ['', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\.\/0-9]*$")]],
       email: ['', [Validators.required, Validators.pattern("^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$")]],
       username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), matchValidator('samePassword', true)]],

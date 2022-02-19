@@ -1,90 +1,30 @@
-/*Swing*/
-@keyframes swing {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  10% {
-    transform: rotate(20deg);
-  }
-
-  30% {
-    transform: rotate(0deg);
-  }
-
-  40% {
-    transform: rotate(-20deg);
-  }
-
-  50% {
-    transform: rotate(0deg);
-  }
-
-  60% {
-    transform: rotate(10deg);
-  }
-
-  70% {
-    transform: rotate(0deg);
-  }
-
-  80% {
-    transform: rotate(-10deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
+img.logo {
+  width: 100px;
+  object-fit: contain;
 }
 
-footer {
-  .div-logo-text {
-    display: flex;
-    align-items: center;
-  }
+.footer-down {
+  border-top: 1px solid #e8e8e8;
+  font-size: 0.85rem;
 
-  img.logo {
-    width: 100px;
-    object-fit: contain;
-  }
-
-  .text-beside-img {
-    flex-grow: 1;
+  h6 {
     font-weight: bold;
   }
 
-  .footer-icons a {
-    font-size: 1.4rem;
-    margin-right: 1.5rem;
-
-    &:hover>i {
-      animation: swing ease-in-out .7s 1 alternate;
-    }
+  ul {
+    line-height: 2;
   }
 
-  .footer-down {
-    border-top: 1px solid #e8e8e8;
-    font-size: 0.85rem;
+  div.logo-group {
+    display: inline-block;
+    height: 95px;
+    margin-right: 2rem;
+    margin-bottom: 8px;
 
-    h6 {
-      font-weight: bold;
-    }
-
-    ul {
-      line-height: 2;
-    }
-
-    div.logo-group {
-      display: inline-block;
-      height: 95px;
-      margin-right: 2rem;
-      margin-bottom: 8px;
-
-      img {
-        height: 99px;
-        object-fit: cover;
-        object-position: 50% 50%;
-      }
+    img {
+      height: 99px;
+      object-fit: cover;
+      object-position: 50% 50%;
     }
   }
 }

@@ -9,6 +9,7 @@ import { AlertifyService } from './alertify.service';
 })
 
 // Servicio para interceptar errores de peticiones Http y mostrarlos con AlertifyJS
+// Source: https://youtu.be/dp08jPXg4g0
 export class HttpErrorInterceptorService implements HttpInterceptor {
 
     constructor(

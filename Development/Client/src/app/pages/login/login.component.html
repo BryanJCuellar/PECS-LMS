@@ -3,7 +3,7 @@
     <div class="row h-100">
       <!--Lado izquierdo-->
       <div class="d-none d-lg-block col-lg-7 col-info-login">
-        <section id="div-info-login">
+        <section id="div-info-login" class="parent-center-y">
           <!--Div centrado verticalmente-->
           <div class="div-center-y">
             <div class="title-text fw-bold pb-4">
@@ -31,7 +31,7 @@
       </div>
       <!--Lado derecho-->
       <div class="col-12 col-lg-5 col-login">
-        <section id="div-login">
+        <section id="div-login" class="parent-center-y">
           <div class="div-center-y">
             <section id="login">
               <div class="text-center mb-3">
@@ -43,18 +43,18 @@
                 <div class="div-input mb-4">
                   <i class="fas fa-user icon-input"></i>
                   <input
-                    [ngClass]="{'input-border-bottom-error':f['userEmail']?.invalid && (f['userEmail']?.dirty || f['userEmail']?.touched)}"
+                    [ngClass]="{'form-input-error border-bottom':f['userEmail']?.invalid && (f['userEmail']?.dirty || f['userEmail']?.touched)}"
                     type="text" class="input-login" formControlName="userEmail" required>
                   <span class="floating-label">Usuario o correo electrónico</span>
                   <span *ngIf="f['userEmail']?.invalid && (f['userEmail']?.dirty || f['userEmail']?.touched)"
-                    class="form-error dark">
+                    class="form-error">
                     <span *ngIf="f['userEmail']?.errors?.['required']">El campo es requerido</span>
                   </span>
                 </div>
                 <div class="div-input mb-2">
                   <i class="fas fa-lock icon-input"></i>
                   <input
-                    [ngClass]="{'input-border-bottom-error':f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)}"
+                    [ngClass]="{'form-input-error border-bottom':f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)}"
                     #inputPassword type="password" class="input-login" formControlName="password" required>
                   <span class="floating-label">Contraseña</span>
                   <i class="fas fa-eye-slash icon-password" (click)="mostrarPassword(inputPassword)"
@@ -62,7 +62,7 @@
                   <i class="fas fa-eye icon-password" (click)="mostrarPassword(inputPassword)"
                     *ngIf="inputPassword.type === 'text'"></i>
                   <span *ngIf="f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)"
-                    class="form-error dark">
+                    class="form-error">
                     <span *ngIf="f['password']?.errors?.['required']">El campo es requerido</span>
                   </span>
                 </div>

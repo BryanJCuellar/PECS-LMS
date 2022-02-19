@@ -1,5 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-// Funcion para verificar coincidencia entre dos valores (Ej. Confirmar contraseña)
+// Funcion para verificar coincidencia entre dos valores (Ej. Confirmar contraseña) 
+// Source: https://dev.to/jdgamble555/angular-confirm-password-validation-custom-validator-3pkl
 export function matchValidator(matchTo: string, reverse?: boolean): ValidatorFn {
     return (control: AbstractControl):
         ValidationErrors | null => {

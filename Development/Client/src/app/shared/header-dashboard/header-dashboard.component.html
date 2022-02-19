@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light nav-dashboard">
+  <div class="container-fluid justify-content-between px-3 px-lg-4">
+    <button class="btn btn-toggle d-inline-block" (click)="toggleSidebarInNav()">
+      <i class="fas fa-toggle-off" *ngIf="!toggledSidebarItem"></i>
+      <i class="fas fa-toggle-on" *ngIf="toggledSidebarItem"></i>
+    </button>
+    <a class="navbar-brand ms-4">
+      <div class="div-logo-text">
+        <img *ngIf="!toggledSidebarItem" [@fadeInOut] class="d-none d-md-inline-block"
+          src="../../../assets/img/logos/Logo-PECS.webp" alt="">
+        <span class="text-beside-img fs-4 ms-2">PECS LMS</span>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPanel"
+      aria-controls="navbarPanel" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse p-3 p-lg-0" id="navbarPanel">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item text-center mb-3 my-lg-auto">
+          <button class="btn btn-notification">
+            <i class="far fa-bell"></i>
+          </button>
+        </li>
+        <li class="nav-item text-center dropdown">
+          <a class="btn dropdown-toggle" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" title="Perfil de usuario">
+            <img src="../../../assets/img/users/user.png" alt="Profile-img">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPanel">
+            <li class="dropdown-user">
+              {{sessionUser?.nombre}} {{sessionUser?.apellido}}
+            </li>
+            <li>
+              <hr class="dropdown-divider text-white">
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/dashboard']">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider text-white">
+            </li>
+            <li>
+              <a class="dropdown-item btn" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

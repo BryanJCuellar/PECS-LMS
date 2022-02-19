@@ -1,0 +1,100 @@
+@use '../../../variables';
+@use '../../../mixins';
+
+@mixin imageNavbar($radius) {
+  width: 40px;
+  height: auto;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: $radius;
+}
+
+.nav-dashboard {
+  padding: 6px 0px;
+  border-bottom: 1px solid #e8e8e8;
+
+  .btn-toggle {
+    padding: 7px 10px;
+    border-radius: 10px;
+    background-color: variables.$color-lightblue;
+    color: variables.$color-white;
+  }
+
+  .navbar-brand img {
+    @include imageNavbar(0px);
+  }
+
+  .nav-item {
+    margin: 0rem 0.5rem;
+  }
+
+  .btn-notification {
+    padding: 8px 12px;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background-color: #ececec;
+    }
+  }
+
+  .dropdown {
+    .dropdown-toggle {
+      display: block;
+      padding: 6px 12px;
+
+      &::after {
+        content: none;
+      }
+
+      &:hover {
+        background-color: #ececec;
+        box-shadow: 0 0 0 0.25rem rgba(236, 236, 236, 0.25);
+      }
+
+      img {
+        @include imageNavbar(50%);
+      }
+    }
+
+    .dropdown-menu {
+      @include mixins.backgroundGradient(right, variables.$sidebar-color1, variables.$sidebar-color2, variables.$sidebar-color3);
+      padding-left: 5px;
+      padding-right: 5px;
+
+      .dropdown-user {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #FFF;
+      }
+
+      .dropdown-item {
+        padding: 5px 40px;
+        border-radius: 0.25rem;
+        color: #FFF;
+
+        &:focus:not(.btn),
+        &:hover:not(.btn),
+        &:active:not(.btn) {
+          background: rgba(77, 69, 161, 0.561);
+        }
+
+        &.btn:focus,
+        &.btn:hover,
+        &.btn:active {
+          background: #dd1818;
+        }
+
+        i {
+          padding-right: 10px;
+        }
+
+        @media screen and (max-width: 991.98px) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

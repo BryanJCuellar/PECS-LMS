@@ -1,20 +1,45 @@
-$color-lightblue: #00C8E0;
-$color-logo2: #045184;
-$color-black: #202020;
-$color-gray: #424242;
+@use '../../../variables';
+@use '../../../mixins';
 
-@mixin button () {
-  background: $color-logo2;
+/*Spin Keyframe*/
+@include mixins.keyframes(spin) {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#not-found {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  text-align: center;
+}
+
+.error-code,
+.fa-dizzy::before {
+  font-size: 10rem;
+  @include mixins.textGradient(variables.$color-logo2, variables.$color-lightblue);
+}
+
+.fa-dizzy::before {
+  display: inline-block;
+  @include mixins.animation('spin 5s alternate infinite');
+}
+
+.message {
+  font-size: 2rem;
+  font-weight: bold;
+  @include mixins.textGradient(variables.$color-black, variables.$color-gray);
+}
+
+a.btn {
+  /*button(font-size, padding)*/
+  @include mixins.button(1.25rem, 11px);
+  width: 200px;
+  max-width: 100%;
+  background: variables.$color-logo2;
   background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
   background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
-
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 700;
-  padding: 11px;
-  border: 0px solid white;
-  border-radius: 0.25rem;
-  cursor: pointer;
 
   &:hover {
     background: #05609c;
@@ -25,69 +50,6 @@ $color-gray: #424242;
   @media (max-width: 575.98px) {
     font-size: 1.1rem;
   }
-
-}
-
-@mixin text-gradient($color1, $color2) {
-  background: $color1;
-  background: -webkit-linear-gradient($color1, $color2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-#not-found {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  text-align: center;
-  display: table;
-}
-
-.error-code {
-  font-size: 10rem;
-  @include text-gradient($color-logo2, $color-lightblue);
-}
-
-.fa-dizzy::before {
-  display: inline-block;
-  font-size: 10rem;
-  @include text-gradient($color-logo2, $color-lightblue);
-  -webkit-animation: spin 5s alternate infinite;
-  -moz-animation: spin 5s alternate infinite;
-  animation: spin 5s alternate infinite;
-}
-
-.message {
-  font-size: 2rem;
-  font-weight: bold;
-  @include text-gradient($color-black, $color-gray);
-}
-
-a.btn {
-  @include button();
-  width: 200px;
-  max-width: 100%;
-  border-radius: 0.5rem;
 }
 
 @media (max-width: 575.98px) {

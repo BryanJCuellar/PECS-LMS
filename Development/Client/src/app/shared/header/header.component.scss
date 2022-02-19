@@ -1,91 +1,88 @@
-/*Variables*/
-$color-logo1: #2b6ca3;
-$color-logo2: #045184;
-$color-logo3:#5BC9DE;
+@use '../../../variables';
 
 header {
-  background-color: white;
+  background-color: variables.$color-white;
+}
 
-  .div-logo-header img.logo {
-    width: 140px;
-    object-fit: contain;
+.div-logo-header img.logo {
+  width: 140px;
+  object-fit: contain;
+}
+
+/*Navbar*/
+.navbar {
+  padding: 0;
+
+  .navbar-brand {
+    padding: 1rem 1rem;
   }
 
-  /*Navbar*/
+  .nav-custom-link {
+    display: block;
+    padding: 1rem 1rem;
+    color: variables.$color-white !important;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+  }
 
-  .navbar {
-    padding: 0;
+  .nav-custom-link:hover,
+  .nav-custom-link.active,
+  .navbar-brand:hover,
+  .dropdown-menu .dropdown-item:hover,
+  .dropdown-menu .dropdown-item:focus {
+    background-color: variables.$color-logo3 !important;
+  }
 
-    .navbar-brand {
-      padding: 1rem 1rem;
-    }
-
-    .nav-custom-link {
-      display: block;
-      padding: 1rem 1rem;
-      color: white !important;
-      text-decoration: none;
-      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-    }
-
-    .nav-custom-link:hover,
-    .nav-custom-link.active,
-    .navbar-brand:hover,
-    .dropdown-menu .dropdown-item:hover,
-    .dropdown-menu .dropdown-item:focus {
-      background-color: $color-logo3 !important;
-    }
-
-    /*Dropdown menu*/
-    .dropdown {
-      &:hover {
-        .dropdown-menu {
-          display: block;
-          margin-top: 0;
-          left: -85px;
-          background-color: $color-logo2;
-          background: -webkit-linear-gradient(to bottom, $color-logo2, $color-logo1);
-          background: linear-gradient(to bottom, $color-logo2, $color-logo1);
-          border: 0;
-        }
-      }
-
-      .dropdown-toggle::after {
-        content: none;
-      }
-
+  /*Dropdown menu*/
+  .dropdown {
+    &:hover {
       .dropdown-menu {
-        .dropdown-item {
-          width: 200px;
-          max-width: 95%;
-          margin-left: auto;
-          margin-right: auto;
-          text-align: center;
-          padding: 5px;
-          border-radius: 0.25rem;
-          color: white;
-        }
+        display: block;
+        margin-top: 0;
+        left: -85px;
+        background-color: variables.$color-logo2;
+        background: -webkit-linear-gradient(to bottom, variables.$color-logo2, variables.$color-logo1);
+        background: linear-gradient(to bottom, variables.$color-logo2, variables.$color-logo1);
+        border: 0;
       }
     }
-  }
 
-  .navbar-dark {
-    .navbar-toggler {
-      border-color: white;
+    .dropdown-toggle::after {
+      content: none;
+    }
 
-      &:hover,
-      &:focus {
-        border-color: $color-logo3;
-        background-color: $color-logo3;
-        box-shadow: none;
-      }
-
-      .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    .dropdown-menu {
+      .dropdown-item {
+        width: 200px;
+        max-width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        padding: 5px;
+        border-radius: 0.25rem;
+        color: variables.$color-white;
       }
     }
   }
 }
+
+.navbar-dark {
+  .navbar-toggler {
+    border-color: variables.$color-white;
+
+    &:hover,
+    &:focus {
+      border-color: variables.$color-logo3;
+      background-color: variables.$color-logo3;
+      box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+  }
+}
+
 
 /*Sticky Navbar*/
 :root {
@@ -107,6 +104,6 @@ header {
 
 @media (max-width: 767.98px) {
   #navbarMain {
-    border-top: 1px solid white;
+    border-top: 1px solid variables.$color-white;
   }
 }

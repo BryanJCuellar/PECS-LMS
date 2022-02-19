@@ -1,127 +1,11 @@
 <div id="dashboard-page">
   <div class="page-wrapper page-sidebar" [ngClass]="{'toggled' : toggledSidebar}">
     <!--Sidebar-->
-    <nav id="sidebar" class="sidebar">
-      <div class="sidebar-content">
-        <ng-scrollbar [autoHeightDisabled]="false" visibility="hover">
-          <div class="sidebar-header">
-            <a class="text-center" [routerLink]="['/dashboard']">
-              <img src="../../../assets/img/logos/Logo-PECS.webp" alt="">
-            </a>
-          </div>
-          <div class="sidebar-menu">
-            <ul>
-              <li>
-                <a class="active" [routerLink]="['/dashboard']">
-                  <div class="sidebar-item-container">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Tablero</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a [routerLink]="['/dashboard']">
-                  <div class="sidebar-item-container">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>Calendario</span>
-                  </div>
-                </a>
-              </li>
-              <li class="sidebar-dropdown">
-                <a (click)="toggleProgramsMenu()" class="dropdown-link" [ngClass]="{'toggled':toggledProgramsMenu}">
-                  <div class="sidebar-item-container">
-                    <i class="fas fa-university"></i>
-                    <span>Mis Programas</span>
-                  </div>
-                </a>
-                <div class="sidebar-submenu" [@slide]="getStateProgramsMenu()">
-                  <ul>
-                    <li>
-                      <a>
-                        <div class="sidebar-item-container">
-                          <i class="fas fa-graduation-cap"></i>
-                          <span>
-                            Programa Diplomado Medicina del Deporte
-                          </span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <div class="sidebar-item-container">
-                          <i class="fas fa-graduation-cap"></i>
-                          <span>Nutricion Deportiva</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </ng-scrollbar>
-      </div>
-    </nav>
+    <app-sidebar [toggledSidebarItem]="toggledSidebar"></app-sidebar>
     <!--Page Content-->
     <div class="page-content">
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-light nav-dashboard">
-        <div class="container-fluid justify-content-between px-3 px-lg-4">
-          <button class="btn btn-toggle d-inline-block" (click)="toggleSidebar()">
-            <i class="fas fa-toggle-off" *ngIf="toggledSidebar"></i>
-            <i class="fas fa-toggle-on" *ngIf="!toggledSidebar"></i>
-          </button>
-          <a class="navbar-brand ms-4">
-            <div class="div-logo-text">
-              <img *ngIf="toggledSidebar" [@fadeInOut] class="d-none d-sm-inline-block"
-                src="../../../assets/img/logos/Logo-PECS.webp" alt="">
-              <span class="text-beside-img fs-4 ms-2">PECS LMS</span>
-            </div>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPanel"
-            aria-controls="navbarPanel" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse p-3 p-lg-0" id="navbarPanel">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item text-center mb-3 my-lg-auto">
-                <button class="btn btn-notification">
-                  <i class="far fa-bell"></i>
-                </button>
-              </li>
-              <li class="nav-item text-center dropdown">
-                <a class="btn dropdown-toggle" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false" title="Perfil de usuario">
-                  <img src="../../../assets/img/users/user.png" alt="Profile-img">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPanel">
-                  <li class="dropdown-user">
-                    {{sessionUser?.nombre}} {{sessionUser?.apellido}}
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider text-white">
-                  </li>
-                  <li>
-                    <a class="dropdown-item" [routerLink]="['/dashboard']">
-                      <i class="fas fa-user"></i>
-                      <span>Perfil</span>
-                    </a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider text-white">
-                  </li>
-                  <li>
-                    <a class="dropdown-item btn" (click)="logout()">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Cerrar Sesión</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <app-header-dashboard #headerDashboard [toggledSidebarItem]="toggledSidebar" (onToggleSidebar)="toggleSidebar()"></app-header-dashboard>
       <!--Dashboard content-->
       <main class="dashboard-content">
         <div class="container-fluid">
@@ -133,7 +17,7 @@
                 <h2 class="fs-4">Cursos Publicados</h2>
                 <hr>
                 <div class="row">
-                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                  <div class="col-12 col-sm-6 col-xl-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
                     <div class="card">
                       <img src="../../../assets/img/defaults/course-1.png" class="card-img-top img-fluid" alt="...">
                       <div class="card-body">
@@ -142,7 +26,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                  <div class="col-12 col-sm-6 col-xl-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
                     <div class="card">
                       <img src="../../../assets/img/defaults/course-2.png" class="card-img-top img-fluid" alt="...">
                       <div class="card-body">
@@ -151,7 +35,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
+                  <div class="col-12 col-sm-6 col-xl-4 d-flex mb-4 animate__animated animate__fadeInUp animate__fadeIn">
                     <div class="card">
                       <img src="../../../assets/img/defaults/course-3.png" class="card-img-top" alt="...">
                       <div class="card-body">
@@ -168,8 +52,9 @@
           </div>
         </div>
       </main>
+      <!--Footer-->
       <app-footer></app-footer>
-      <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSidebarState()}"></div>
+      <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : getSidebarState()}"></div>
     </div>
   </div>
 </div>

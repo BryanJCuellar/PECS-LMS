@@ -1,44 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { ActivatedRoute, Router } from '@angular/router';
+// Components
+import { HeaderDashboardComponent } from 'src/app/shared/header-dashboard/header-dashboard.component';
 // Services
-import { AlertifyService } from 'src/app/services/alertify.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  animations: [
-    trigger('slide', [
-      state('up', style({ height: 0 })),
-      state('down', style({ height: '*' })),
-      transition('up <=> down', animate(200))
-    ]),
-    trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
-        style({ opacity: 0 }),
-        animate(500, style({ opacity: 1 }))
-      ]),
-      transition(':leave', [   // :leave is alias to '* => void'
-        animate(500, style({ opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  // toggled = false means that the element is shown
-  toggledSidebar = false;
-  toggledProgramsMenu = false;
+  // Componente ViewChild para interactuar con los metodos de header-dashboard.component.ts
+  @ViewChild('headerDashboard') headerDashboardComponent: HeaderDashboardComponent;
+  // toggled = true means that the item is shown
+  toggledSidebar = true;
   // Usuario en sesion
   sessionUser: any;
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    private alertifyService: AlertifyService,
     private authService: AuthService,
     private usersService: UsersService
   ) { }
@@ -50,55 +31,36 @@ export class DashboardComponent implements OnInit {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           // Sidebar hidden
-          this.toggledSidebar = true;
+          this.setSidebarState(false);
         } else {
           // Sidebar shown
-          this.toggledSidebar = false;
+          this.setSidebarState(true);
         }
       });
+    // Obtener informacion de usuario logueado y asignarlo a la variable en header-dashboard
     this.authService.getSessionUser()
-    .subscribe({
-      next: (res) => {
-        console.log(res);
-        this.sessionUser = res?.data;
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          this.sessionUser = res?.data;
+          this.headerDashboardComponent.sessionUser = this.sessionUser;
+        }
+      })
   }
 
-  toggleProgramsMenu() {
-    this.toggledProgramsMenu = !this.toggledProgramsMenu;
-  }
-
-  getStateProgramsMenu() {
-    if (this.toggledProgramsMenu) {
-      return 'up';
-    } else {
-      return 'down';
-    }
-  }
-
+  // Get sidebar state
   getSidebarState() {
     return this.toggledSidebar;
   }
 
+  // Set sidebar state
   setSidebarState(state: boolean) {
+    console.log("Toggled:", state);
     this.toggledSidebar = state;
   }
 
+  // Change state of toggledSidebar (true = shown, false = hidden)
   toggleSidebar() {
     this.setSidebarState(!this.getSidebarState());
-  }
-
-  logout(){
-    this.authService.logoutUser()
-    .subscribe({
-      next: (res) => {
-        if(res.message == 'Logout exitoso'){
-          this.alertifyService.success(res.message);
-          this.router.navigate(['/login']);
-        }
-      }
-    });
   }
 
 }

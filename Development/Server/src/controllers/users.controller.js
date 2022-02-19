@@ -260,7 +260,6 @@ function usersController(pool) {
                     errorMessage: err
                 });
             }
-            console.log(result);
             res.status(200).send({
                 message: 'Cuenta activada exitosamente'
             });

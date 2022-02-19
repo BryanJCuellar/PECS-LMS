@@ -21,7 +21,7 @@ const scrollOptions: ExtraOptions = {
 };
 // Rutas
 const routes: Routes = [
-  { path: '', component: LandingComponent, data: { title: 'PECS | LMS' }, canActivate: [CheckLoginGuard] },
+  { path: '', component: LandingComponent, data: { title: 'PECS LMS' }, canActivate: [CheckLoginGuard] },
   { path: 'login', component: LoginComponent, data: { title: 'PECS LMS - Iniciar sesión' }, canActivate: [CheckLoginGuard] },
   { path: 'login/:idUsuario/:codigo', component: LoginComponent, data: { title: 'Activación de Cuenta' }, canActivate: [CheckLoginGuard] },
   { path: 'signup', component: SignupComponent, data: { title: 'PECS LMS - Registro' }, canActivate: [CheckLoginGuard] },

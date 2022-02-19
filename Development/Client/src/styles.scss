@@ -1,38 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+/*@use rule for SASS*/
+@use 'variables';
+@use 'mixins';
+/*AlertifyJS*/
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
-/*Variables*/
-$font-family: 'Lato',
-sans-serif;
-$font-family2: 'Open Sans',
-sans-serif;
-$color-black: #202020;
-$color-gray: #424242;
-$color-yellow: #FFCC00;
-$color-lightblue: #00C8E0;
-$color-red1: #FF0033;
-$color-red2:#FF0020;
-/*Paleta de colores*/
-$color-logo1: #2b6ca3;
-$color-logo2: #045184;
-$color-logo3:#5BC9DE;
-$color-logo4: #48A8D4;
-$color-logo5: #9CCFE9;
-
-/*Mixins*/
-@mixin link {
-  cursor: pointer;
-  text-decoration: none;
-}
-/*No seleccionar texto*/
-@mixin unselectableText {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
 * {
   margin: 0;
@@ -41,8 +13,8 @@ $color-logo5: #9CCFE9;
 }
 
 body {
-  font-family: $font-family;
-  color: $color-black;
+  font-family: variables.$font-family;
+  color: variables.$color-black;
 }
 
 body,
@@ -50,28 +22,66 @@ html {
   height: 100%;
 }
 
-/*Spinner*/
-@-moz-keyframes spinner {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
+a {
+  @include mixins.link;
 
-  100% {
-    -moz-transform: rotate(360deg);
+  &,
+  &:hover {
+    color: inherit;
   }
 }
 
-@-webkit-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
+nav a,
+button,
+img {
+  @include mixins.unselectableText;
+}
 
-  100% {
-    -webkit-transform: rotate(360deg);
+ul {
+  padding-left: 0rem;
+}
+
+li {
+  list-style: none;
+}
+
+/*Colores*/
+.yellow-text {
+  color: variables.$color-yellow;
+}
+
+.title-text {
+  color: variables.$color-logo1;
+}
+
+.title-text-2 {
+  color: variables.$color-logo2;
+}
+
+.content-text {
+  color: variables.$color-gray;
+}
+
+/*Enlaces*/
+.light-link,
+.dark-link {
+  @include mixins.link;
+}
+
+.light-link {
+  color: inherit;
+
+  &:hover {
+    color: variables.$color-lightblue !important;
   }
 }
 
-@keyframes spinner {
+.dark-link {
+  color: variables.$color-white !important;
+}
+
+/*Spinner Keyframe para icono de carga*/
+@include mixins.keyframes(spinner) {
   0% {
     transform: rotate(0deg);
   }
@@ -80,7 +90,56 @@ html {
     transform: rotate(360deg);
   }
 }
+
+/*Swing Keyframe for icons*/
+@include mixins.keyframes(swing) {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(-10deg);
+  }
+
+  40% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  70% {
+    transform: rotate(-10deg);
+  }
+
+  80% {
+    transform: rotate(0deg);
+  }
+
+  90% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 /*Icono de carga*/
+/*Contenedor*/
 .loading-container {
   position: fixed;
   top: 0;
@@ -94,19 +153,18 @@ html {
   }
 }
 
+/*Icono*/
 .loader {
   position: absolute;
   border: 16px solid #e7e7e7;
   border-radius: 50%;
-  border-top: 16px solid $color-lightblue;
+  border-top: 16px solid variables.$color-lightblue;
   width: 70px;
   height: 70px;
   left: 50%;
   top: 50%;
-  -webkit-animation: spinner 2s linear infinite;
-  -moz-animation: spinner 2s linear infinite;
-  animation: spinner 2s linear infinite;
   display: none;
+  @include mixins.animation('spinner 2s linear infinite');
 
   &.show {
     display: block;
@@ -134,82 +192,41 @@ html {
   background: #989898;
 }
 
-/*Div centrado verticalmente (Ocupa un elemento padre con display:table)*/
-.div-center-y {
-  display: table-cell;
-  vertical-align: middle;
-}
+/*Para centrar elementos verticalmente*/
+.parent-center-y {
+  /*Para centrar elementos hijos*/
+  display: table;
 
-a {
-  @include link();
-
-  &,
-  &:hover {
-    color: inherit;
+  /*Div centrado verticalmente (Ocupa un elemento padre con display:table)*/
+  .div-center-y {
+    display: table-cell;
+    vertical-align: middle;
   }
 }
 
-nav a,
-button,
-img {
-  @include unselectableText();
-}
-
-ul {
-  padding-left: 0rem;
-}
-
-li {
-  list-style: none;
-}
-
-/*Background*/
+/*Main Navbar Styles*/
 .nav-bg {
-  background-color: $color-logo2;
-  background: -webkit-linear-gradient(to bottom, $color-logo2, $color-logo1);
-  background: linear-gradient(to bottom, $color-logo2, $color-logo1);
+  background-color: variables.$color-logo2;
+  background: -webkit-linear-gradient(to bottom, variables.$color-logo2, variables.$color-logo1);
+  background: linear-gradient(to bottom, variables.$color-logo2, variables.$color-logo1);
 }
 
+/*Main Footer Styles*/
 .footer-bg {
-  background-color: #ffffff;
+  background-color: variables.$color-white;
   border-top: 1px solid #d8d8d8;
   -webkit-transition: border-color .15s ease-in-out;
   transition: border-color .15s ease-in-out;
 }
 
-/*Colores*/
-.yellow-text {
-  color: $color-yellow;
-}
+/*Using Swing Keyframe for footer icons*/
+.footer-icons a {
+  font-size: 1.4rem;
+  margin-right: 1.5rem;
 
-.title-text {
-  color: $color-logo1;
-}
-
-.title-text-2 {
-  color: $color-logo2;
-}
-
-.content-text {
-  color: $color-gray;
-}
-
-/*Enlaces*/
-.light-link,
-.dark-link {
-  @include link();
-}
-
-.light-link {
-  color: inherit;
-
-  &:hover {
-    color: $color-lightblue !important;
+  &:hover>i {
+    @include mixins.animation('swing ease-in-out .7s 1 alternate');
   }
-}
-
-.dark-link {
-  color: white !important;
 }
 
 /*For setting a text beside img*/
@@ -226,13 +243,13 @@ li {
 /*Footer on sidebar page*/
 .page-sidebar {
   .inside-footer {
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   &.toggled .inside-footer {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   @media screen and (max-width: 767.98px) {
@@ -245,13 +262,20 @@ li {
   }
 }
 
-/*Reactive forms*/
-.form-required {
-  color: $color-red1;
+/*Main Sidebar Styles*/
+.sidebar .sidebar-content .sidebar-menu ul li a:hover>.sidebar-item-container>i::before {
+  display: inline-block;
+  @include mixins.animation('swing ease-in-out .7s 1 alternate');
 }
 
+/*REACTIVE FORMS*/
+.form-required {
+  color: variables.$color-red1;
+}
+
+/*Text Error*/
 .form-error {
-  color: $color-red1;
+  color: variables.$color-red1;
   font-size: 0.8rem;
   font-weight: bold;
   line-height: 1.5;
@@ -261,12 +285,301 @@ li {
   white-space: nowrap;
 }
 
+/*Input Error*/
 .form-input-error {
-  border-color: $color-red2 !important;
+  border-color: variables.$color-red2 !important;
 
   &:focus {
     outline: 0 !important;
-    border-color: $color-red2 !important;
+    border-color: variables.$color-red2 !important;
     box-shadow: 0 0 0 0.15rem #ff0020bf !important;
+  }
+
+  /*Inputs with border-bottom only*/
+  &.border-bottom {
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
+
+/***COMPONENTS CODE***/
+/*LANDING PAGE*/
+#landing-page {
+
+  /*Carousel*/
+  .carousel {
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 270px;
+    }
+
+    .carousel-indicators {
+      margin-bottom: 0.1rem;
+
+      & [data-bs-target] {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 55px;
+      height: 55px;
+      margin-top: auto;
+      margin-bottom: auto;
+      color: #FFF;
+      background-color: #858585b4;
+    }
+
+    .carousel-background {
+      position: relative;
+      text-align: center;
+      color: #FFF;
+      display: block;
+      background: rgba(4, 81, 132, 0.3);
+      background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+      background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+
+      img {
+        position: relative;
+        z-index: -1;
+        display: block;
+      }
+
+      .text-centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        max-width: 100%;
+      }
+    }
+  }
+
+  #btn-ingresar,
+  .segment button {
+    /*button(font-size, padding)*/
+    @include mixins.button(1.4rem, 10px 40px);
+    background: rgba(44, 36, 136, 0.902);
+    background: -webkit-linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+    background: linear-gradient(to right, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+
+    &:hover {
+      background: rgba(36, 199, 220, 0.902);
+      background: -webkit-linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+      background: linear-gradient(to left, rgba(44, 36, 136, 0.902), rgba(36, 199, 220, 0.902));
+    }
+  }
+
+  .segment-one p,
+  .segment p {
+    /*paragraph($fontSize, $fontSizeResponsive, $responsiveWidth)*/
+    @include mixins.paragraph(1.25rem, 1.1rem, 575.98px);
+  }
+}
+
+/*LOGIN PAGE*/
+#login-page {
+  .col-info-login {
+    padding: 0px;
+    box-shadow: 0px 0px 7rem inset #e9f0f1;
+  }
+
+  #div-info-login {
+    width: 100%;
+    padding: 0px 10px;
+    text-align: center;
+
+    ul li {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    div.logo-group {
+      display: inline-block;
+      height: 95px;
+      margin-right: 2rem;
+      margin-bottom: 8px;
+
+      img {
+        height: 95px;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+    }
+  }
+
+  .col-login {
+    padding: 0px;
+    background: variables.$color-logo1;
+    background: radial-gradient(circle, variables.$color-logo1 10%, variables.$color-logo2 100%);
+  }
+
+  #div-login {
+    width: 100%;
+    padding: 0px 70px;
+    position: relative;
+    color: #FFF;
+  }
+
+  #login {
+    max-width: 100%;
+    padding: 30px 30px;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1 {
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /*Relative parent for floating label absolute*/
+    .div-input {
+      position: relative;
+
+      .input-login {
+        width: 100%;
+        background-color: transparent;
+        padding: 15px 40px 10px 25px;
+        color: #FFF;
+        border-width: 0 0 2px !important;
+        border-color: #FFF;
+        border-radius: 0px;
+        outline: 0;
+        font-size: 18px;
+      }
+
+      .input-login:focus~.floating-label,
+      .input-login:not(:focus):valid~.floating-label {
+        top: -5px;
+        bottom: -5px;
+        left: 5px;
+        font-size: 11px;
+        opacity: 1;
+      }
+
+      .floating-label {
+        position: absolute;
+        pointer-events: none;
+        left: 25px;
+        top: 15px;
+        font-size: 18px;
+        transition: 0.2s ease all;
+      }
+
+      i.icon-input {
+        position: absolute;
+        left: 0;
+        top: 20px;
+      }
+
+      i.icon-password {
+        margin-left: -35px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+    }
+
+    button {
+      width: 100%;
+      background-color: #25a2cf;
+      color: #FFF;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 11px;
+      border: 0px solid #FFF;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #28b1e2;
+        box-shadow: 0px 0px 2px inset#9CCFE9;
+      }
+    }
+
+    .dark-link {
+      font-size: 13px;
+
+      &:hover {
+        color: variables.$color-yellow !important;
+      }
+    }
+  }
+}
+
+/*SIGNUP PAGE*/
+#sign-page {
+  #section-signup {
+    padding: 10px 0px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .form-label {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #student-img,
+    #teacher-img {
+      height: 220px;
+      object-fit: cover;
+      object-position: 50% 50%;
+      filter: grayscale(100%);
+    }
+
+    .input-sign {
+      width: 100%;
+      padding: 10px 45px 10px 20px;
+      line-height: 1.5;
+      font-size: 20px;
+      color: #212529;
+      background-color: #FFF;
+      background-clip: padding-box;
+      border: 1px solid #b0b6bb;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0.25rem;
+      box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 13%), inset 0 2px 1px 0 rgb(0 0 0 / 5%);
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+      &:focus {
+        color: #212529;
+        background-color: #FFF;
+        border-color: #9CCFE9;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(72, 168, 212, 0.75);
+      }
+
+      &:focus+i.icon-password {
+        color: #21b2c5;
+      }
+
+      &.form-input-error:focus+i.icon-password {
+        color: #ff0033;
+      }
+    }
+
+    button {
+      /*button(font-size, padding)*/
+      @include mixins.button(1.25rem, 11px);
+      width: 100%;
+      background: #045184;
+      background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+      background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
+
+      &:hover {
+        background: #0885d8;
+        background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(8, 133, 216, 0.3) 100%);
+        background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(8, 133, 216, 0.3) 100%);
+      }
+    }
   }
 }

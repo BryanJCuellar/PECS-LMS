@@ -1,156 +1,77 @@
-@mixin button {
-  background: #045184;
-  background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
-  background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(4, 81, 132, 0.3) 100%);
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 700;
-  padding: 11px;
-  border: 0px solid white;
-  border-radius: 0.25rem;
-  cursor: pointer;
+#sign-page {
 
-  &:hover {
-    background: #0885d8;
-    background-image: -webkit-linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(8, 133, 216, 0.3) 100%);
-    background-image: linear-gradient(to top, rgba(48, 208, 208, 0.3) 0%, rgba(8, 133, 216, 0.3) 100%);
-  }
-
-  @media (max-width: 767.98px) {
-    font-size: 18px;
-  }
-}
-
-#section-signup {
-  padding: 10px 0px;
-  margin-left: auto;
-  margin-right: auto;
-
-  .form-label {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  #student-img,
-  #teacher-img {
-    height: 220px;
-    object-fit: cover;
-    object-position: 50% 50%;
-    filter: grayscale(100%);
-  }
-
-  .input-sign {
-    width: 100%;
-    padding: 10px 45px 10px 20px;
-    line-height: 1.5;
-    font-size: 20px;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #b0b6bb;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.25rem;
-    box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 13%), inset 0 2px 1px 0 rgb(0 0 0 / 5%);
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-    &:focus {
-      color: #212529;
-      background-color: #fff;
-      border-color: #9CCFE9;
-      outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(72, 168, 212, 0.75);
-    }
-
-    &:focus+i.icon-password {
-      color: #21b2c5;
-    }
-
-    &.form-input-error:focus+i.icon-password {
-      color: #ff0033;
-    }
-  }
-
-  button {
-    width: 100%;
-    @include button();
-  }
-}
-
-#section-signup,
-#section-signup-success {
-  max-width: 100%;
-  font-size: 20px;
-}
-
-#section-signup-success {
-  padding: 50px 0px;
-  background: whitesmoke;
-
-  .background-box {
-    background: white;
-    width: 700px;
+  #section-signup,
+  #section-signup-success {
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 50px;
-    border-radius: 1rem;
-  }
-
-  a.btn {
-    @include button();
-    width: 250px;
-    max-width: 100%;
-    border-radius: 0.5rem;
-  }
-
-  .light-link:hover {
-    text-decoration: underline;
-  }
-}
-
-i.icon-password {
-  margin-left: -40px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #202020;
-}
-
-.filter-none {
-  filter: none !important;
-}
-
-.image-text-selected {
-  color: #07c707;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-@media (max-width: 767.98px) {
-
-  #section-signup {
-    max-width: 95%;
-    font-size: 18px;
-
-    #student-img,
-    #teacher-img {
-      height: 160px;
-    }
-
-    .form-label,
-    .input-sign {
-      font-size: 18px;
-    }
+    font-size: 20px;
   }
 
   #section-signup-success {
-    background: white;
-    padding: 20px 0px;
-    font-size: 18px;
+    padding: 50px 0px;
+    background: whitesmoke;
 
     .background-box {
-      padding: 30px;
+      background: #FFF;
+      width: 700px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 50px;
+      border-radius: 1rem;
+    }
+
+    .light-link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  i.icon-password {
+    margin-left: -40px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #202020;
+  }
+
+  .filter-none {
+    filter: none !important;
+  }
+
+  .image-text-selected {
+    color: #07c707;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #sign-page {
+    #section-signup {
+      max-width: 95%;
+      font-size: 18px;
+
+      #student-img,
+      #teacher-img {
+        height: 160px;
+      }
+
+      .form-label,
+      .input-sign {
+        font-size: 18px;
+      }
+
+      button {
+        font-size: 18px;
+      }
+    }
+
+    #section-signup-success {
+      background: #FFF;
+      padding: 20px 0px;
+      font-size: 18px;
+
+      .background-box {
+        padding: 30px;
+      }
     }
   }
 }

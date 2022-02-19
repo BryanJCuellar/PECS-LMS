@@ -1,3 +1,4 @@
+// Source: https://www.youtube.com/playlist?list=PLmGlSqRtRSPjL9MxaiaXQcfVxswKErJTq (Passport with Angular)
 // Dependencies
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');

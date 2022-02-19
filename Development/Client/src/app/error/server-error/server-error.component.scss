@@ -1,15 +1,8 @@
-$color-black: #202020;
-$color-gray: #424242;
+@use '../../../variables';
+@use '../../../mixins';
 
-@mixin text-gradient($color1, $color2) {
-  background: $color1;
-  background: -webkit-linear-gradient($color1, $color2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-@keyframes wireMove {
+/*WireMove Keyframe*/
+@include mixins.keyframes(wireMove) {
   from {
     left: 0px;
   }
@@ -22,7 +15,7 @@ $color-gray: #424242;
 .message {
   font-size: 2rem;
   font-weight: bold;
-  @include text-gradient($color-black, $color-gray);
+  @include mixins.textGradient(variables.$color-black, variables.$color-gray);
 }
 
 hr {
@@ -42,16 +35,16 @@ hr {
 }
 
 .fa-server {
-  @include text-gradient(#bdc3c7, #2c3e50);
+  @include mixins.textGradient(#bdc3c7, #2c3e50);
 }
 
 .fa-database {
-  @include text-gradient(#0CAFFF, #0066b2);
+  @include mixins.textGradient(#0CAFFF, #0066b2);
 }
 
 .fa-exclamation-triangle {
+  @include mixins.textGradient(#FF6700, #FFA368);
   font-size: 2.2rem;
-  @include text-gradient(#FF6700, #FFA368);
   position: absolute;
   right: -10px;
   bottom: -3px;
@@ -59,17 +52,15 @@ hr {
 }
 
 .fa-grip-lines {
+  @include mixins.textGradient(#202020, #555d50);
   font-size: 1.5rem;
-  @include text-gradient(#202020, #555d50);
 }
 
 .fa-grip-lines.color {
-  @include text-gradient(#32de84, #018749);
   position: absolute;
   bottom: 0;
-  -webkit-animation: wireMove 3s alternate infinite;
-  -moz-animation: wireMove 3s alternate infinite;
-  animation: wireMove 3s alternate infinite;
+  @include mixins.textGradient(#32de84, #018749);
+  @include mixins.animation('wireMove 3s alternate infinite');
 }
 
 @media (max-width: 575.98px) {

@@ -1,3 +1,4 @@
+// Random Code for Confirmation Code
 module.exports = function (length, type) {
     let characters;
     switch (type) {

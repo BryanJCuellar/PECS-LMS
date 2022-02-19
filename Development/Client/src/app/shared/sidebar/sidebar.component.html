@@ -1,0 +1,61 @@
+<nav id="sidebar" class="sidebar" [ngClass]="{'toggled' : toggledSidebarItem}">
+  <div class="sidebar-content">
+    <ng-scrollbar [autoHeightDisabled]="false" visibility="hover">
+      <div class="sidebar-header">
+        <a class="text-center" [routerLink]="['/dashboard']">
+          <img src="../../../assets/img/logos/Logo-PECS.webp" alt="">
+        </a>
+      </div>
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a class="active" [routerLink]="['/dashboard']">
+              <div class="sidebar-item-container">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Tablero</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/dashboard']">
+              <div class="sidebar-item-container">
+                <i class="far fa-calendar-alt"></i>
+                <span>Calendario</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a (click)="toggleProgramsMenu()" class="dropdown-link" [ngClass]="{'toggled':toggledProgramsMenu}">
+              <div class="sidebar-item-container">
+                <i class="fas fa-university"></i>
+                <span>Mis Programas</span>
+              </div>
+            </a>
+            <div class="sidebar-submenu" [@slide]="getStateProgramsMenu()">
+              <ul>
+                <li>
+                  <a>
+                    <div class="sidebar-item-container">
+                      <i class="fas fa-graduation-cap"></i>
+                      <span>
+                        Programa Diplomado Medicina del Deporte
+                      </span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <div class="sidebar-item-container">
+                      <i class="fas fa-graduation-cap"></i>
+                      <span>Nutricion Deportiva</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </ng-scrollbar>
+  </div>
+</nav>
